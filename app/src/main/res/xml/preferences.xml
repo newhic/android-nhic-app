@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="Languages" >
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/listArray"
+            android:entryValues="@array/listValues"
+            android:key="podcastLanguage"
+            android:summary="Select the language you want podcast default to be in"
+            android:title="Podcast Language" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Other" >
+        <Preference
+            android:key="aboutPrefKey"
+            android:summary="About the developer and the NHIC app"
+            android:title="About" >
+        </Preference>
+        <Preference
+            android:key="ackPrefKey"
+            android:summary="The people who have made this app possible through their support"
+            android:title="Acknowlegements" >
+        </Preference>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Privacy Policy" >
+        <Preference
+            android:key="eulaPrefKey"
+            android:title="Policy" >
+        </Preference>
+    </PreferenceCategory>
+
+    <EditTextPreference
+        android:enabled="false"
+        android:key="version"
+        android:persistent="false"
+        android:selectable="false"
+        android:shouldDisableView="false"
+        android:title="@string/version" />
+
+</PreferenceScreen>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="5dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="5dp" >
+
+    <ImageView
+        android:id="@+id/videoImg"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:contentDescription="@string/youTubeThumbnail"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/videoTitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/videoImg"
+        android:layout_toRightOf="@id/videoImg"
+        android:maxLines="3"
+        android:ellipsize="end"
+        android:text="@string/defaultAnnouncement"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/videoDate"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/videoImg"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/videoImg"
+        android:maxLines="1"
+        android:text="@string/defaultDate"
+        android:textSize="14sp" />
+
+</RelativeLayout>

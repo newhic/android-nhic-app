@@ -1,0 +1,64 @@
+package apps4christ.android.nhicapp.announcements;
+
+
+import java.util.List;
+
+import android.app.Activity;
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
+
+import apps4christ.android.nhicapp.podcast.RssItem;
+import apps4christ.android.nhicapp.R;
+
+public class AnnounceAdapter extends ArrayAdapter<RssItem> {
+	
+	private LayoutInflater inflater;
+	private List<RssItem> datas;
+	
+	static class ViewHolder {
+		TextView titleView;
+		TextView dateView;
+		TextView descView;
+	}
+	
+	// Constructor for Announcement Adapter
+	public AnnounceAdapter(Context context, int textViewResourceId,
+			List<RssItem> objects) {
+		super(context, textViewResourceId, objects);
+		// TODO Auto-generated constructor stub
+		inflater = ((Activity) context).getLayoutInflater();
+		datas = objects;
+	}
+	
+	public View getView(int position, View convertView, ViewGroup parent) {
+		ViewHolder viewHolder;
+
+		if (convertView == null) {
+			convertView = inflater.inflate(R.layout.announcement_item_row, null);
+
+			viewHolder = new ViewHolder();
+			assert(viewHolder != null);
+			
+			viewHolder.titleView = (TextView) convertView
+					.findViewById(R.id.announcementTitle);
+			viewHolder.dateView = (TextView) convertView
+					.findViewById(R.id.announcementDate);
+			viewHolder.descView = (TextView) convertView
+					.findViewById(R.id.announcementDesc);
+			convertView.setTag(viewHolder);
+		} else {
+			viewHolder = (ViewHolder) convertView.getTag();
+		}
+
+		viewHolder.titleView.setText(datas.get(position).getTitle());
+		viewHolder.dateView.setText(datas.get(position).getPubDate());
+		viewHolder.descView.setText(datas.get(position).getAuthor());
+
+		return convertView;
+	}
+
+}
