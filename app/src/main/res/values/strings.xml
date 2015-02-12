@@ -35,9 +35,7 @@
         <item>Announcements</item>
         <item>Podcasts</item>
         <item>Videos</item>
-        <item>Online Giving</item>
         <item>Settings</item>
-        <item>What\'s Hot</item>
     </string-array>
 
     <!-- Nav Drawer List Item Icons -->
@@ -47,9 +45,7 @@
         <item>@drawable/ic_announce</item>
         <item>@drawable/ic_podcasts</item>
         <item>@drawable/ic_video</item>
-        <item>@drawable/ic_whats_hot</item>
         <item>@drawable/ic_pages</item>
-        <item>@drawable/ic_whats_hot</item>
     </array>
 
     <!-- RSS podcast XML URLs sorted by language -->

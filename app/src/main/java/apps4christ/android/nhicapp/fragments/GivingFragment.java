@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+/* This class is unused due to Google's donation policies */
 @SuppressLint("SetJavaScriptEnabled")
 public class GivingFragment extends Fragment {
 

@@ -56,7 +56,6 @@ public class MainActivity extends Activity {
 	Fragment announceFrag = new AnnounceFragment();
 	Fragment videosFrag = new VideosFragment();
 	Fragment settingsFrag = new SettingsFragment();
-	Fragment givingFrag = new GivingFragment();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -149,13 +148,9 @@ public class MainActivity extends Activity {
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons
 				.getResourceId(3, -1)));
 		
-		// Online Giving
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons
-				.getResourceId(4, -1)));
-		
 		// Settings
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons
-				.getResourceId(5, -1)));
+				.getResourceId(4, -1)));
 	}
 
 	/**
@@ -231,11 +226,6 @@ public class MainActivity extends Activity {
 	        getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 			break;
 		case 4:
-			fragment = givingFrag;
-			/* Disable dropdown list navigation for the action bar */
-	        getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-			break;
-		case 5:
 			fragment = settingsFrag;
 			/* Disable dropdown list navigation for the action bar */
 	        getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
