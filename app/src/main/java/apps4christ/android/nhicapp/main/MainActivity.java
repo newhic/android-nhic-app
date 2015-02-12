@@ -149,7 +149,7 @@ public class MainActivity extends Activity {
 				.getResourceId(3, -1)));
 		
 		// Settings
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons
 				.getResourceId(4, -1)));
 	}
 
