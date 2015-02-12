@@ -6,6 +6,10 @@ This README documents the steps  necessary to get the application up and running
 
 Finding the tools necessary for Android development is rather simple. Whether you have a Linux, Mac, or Windows machine, you can develop for Android by downloading Android Studio at http://developer.android.com/sdk/index.html
 
+Unlike Xcode for iOS development, you do not even need to pay for the Google developer license to test on physical devices. 
+
+The caveat though is that the Android Studio emulator will not run on Macs with a Core 2 Duo processor. It would be best to just test on a physical device. 
+
 Many online guides will show setup procedures for Eclipse SDK development. However, Android Studio is now the official Android SDK. 
 
 Please update Android Studio to the latest version before checking out the project from source control. Also click on the Android ADK symbol and update any files requiring an update. 
