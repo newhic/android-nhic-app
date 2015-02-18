@@ -98,6 +98,8 @@ public class PodcastFragment extends Fragment {
 
         bar = getActivity().getActionBar();
 
+        bar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+
         langSel = new ArrayAdapter<String>(bar.getThemedContext(),
                 android.R.layout.simple_spinner_dropdown_item, getResources()
                 .getStringArray(R.array.podcast_lang_select));
