@@ -2,7 +2,7 @@
 
 This README documents the steps  necessary to get the application up and running
 
-### How do I get set up? ###
+### Android Studio ###
 
 Finding the tools necessary for Android development is rather simple. Whether you have a Linux, Mac, or Windows machine, you can develop for Android by downloading Android Studio at http://developer.android.com/sdk/index.html
 
@@ -12,19 +12,27 @@ The caveat though is that the Android Studio emulator will not run on Macs with 
 
 Many online guides will show setup procedures for Eclipse SDK development. However, Android Studio is now the official Android SDK. 
 
-Please update Android Studio to the latest version before checking out the project from source control. Also click on the Android ADK symbol and update any files requiring an update. 
+### Setting Up ###
 
-To check project out from source control, put in the following URL as the source:
+1. Open Android Studio and update to the latest version before checking out the project from source control. You will have to restart Android Studio once the update is done. 
 
-https://your-username@bitbucket.org/apps4christ/nhic-android-app.git
+2. Check out the New Hope International Android App project by clicking on "Check out project from Version Control". It will give you an option to check out from different sources. Click on Git. 
 
-Follow the setup wizard and let it build the project structure for you. Depending on the speed of your system, it may take awhile to even reach a point where you can compile and run the project. 
+3. Put in the following for Vcs Repository URL: https://your-username@bitbucket.org/apps4christ/nhic-android-app.git
 
-When the run button is no longer grayed out, test that everything has built properly by running and emulating the app on the provided Nexus 5 emulation image.
+4. Navigate to a local directory you want to store the project
 
-You are good to go!
+5. Give it a appropriate directory name such as NHIC-Android-App
+
+6. Press ok and it will start the clone process for you. Once done, it will confirm that you have checked out an Android Studio project file and will ask if you want to open it. Press yes. 
+
+7. A menu will pop up called "Import Project from Gradle". Make sure that it the "use default gradle wrapper (recommended)" radio button is selected. Press OK. 
+
+8. It will take a few minutes to build the Gradle project files. When the run button is no longer grayed out, test that everything has built properly by running and emulating the app on the provided Nexus 5 emulation image.
 
 ### Contribution guidelines ###
+
+The Play Store App submission process only takes a few hours. Since it doesn't take very long, stable builds will be uploaded more often than the iOS version of this app. 
 
 Please only commit code that compiles and does not crash. Understandably some code may lead to unforeseen crashes, but by compiling and testing on the emulator you should be able to catch it before committing. 
 
