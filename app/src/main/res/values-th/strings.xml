@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">NHIC</string>
+
+    <string name="searchHint">ค้นหา พอดคาสต์</string>
+    <string name="homeMsg">We are an international, protestant, evangelical, charismatic, non-denominational church.  Our senior pastors are Ps. Varun and Da Laohaprasit, who are devoting their time and lives to reaching out to local communities and internationally.</string>
+
+    <!-- Nav Drawer Menu Items -->
+    <string-array name="nav_drawer_items">
+        <item>บ้าน</item>
+        <item>ประกาศ</item>
+        <item>พอดคาสต์</item>
+        <item>วิดีโอ</item>
+        <item>การตั้งค่า</item>
+    </string-array>
+
+    <!-- Home page vision, statement, values -->
+    <string-array name="home_page_values">
+        <item>วิสัยทัศน์</item>
+        <item>คำแถลง</item>
+        <item>ค่านิยม</item>
+    </string-array>
+
+    <!-- Preference Fragment strings -->
+    <string name="prefLangCatTitle">ภาษา</string> //Languages
+    <string name="prefOthCatTitle">อื่น ๆ</string>  //Other
+    <string name="prefPolCatTitle">นโยบายความเป็นส่วนตัว</string> //Privacy Policy
+
+    <string name="prefLangTitle">ภาษา พอดคาสต์</string> //Podcast Language
+    <string name="prefLangSumm">Select the language you want podcast default to be in</string>
+
+    <string name="prefAbtTitle">เกี่ยวกับ</string>
+    <string name="prefAbtSumm">About the developer and the NHIC app</string>
+
+    <string name="prefAckTitle">กิตติกรรมประกาศ</string> //Acknowledgements
+    <string name="prefAckSumm">The people who have made this app possible through their support</string>
+
+    <string name="prefPolTitle">นโยบาย</string> //Policy
+
+
+    <string name="aboutDev">Apps4Christ is a development team aimed at creating apps for church communities. As software engineers by trade, they hope to use their skills for the glory of God\'s kingdom! </string>
+    <string name="aboutApp">The NHIC App was birthed when the Ohana caregroups started their weekly sermon listening. While it was much easier for iTunes users to get the podcasts, the rest of us had to rely on dropbox. Uploading and downloading the sermons proved to be a complicated process and a new way of doing things was needed. The NHIC App started off as a simple podcast application but slowly morphed into a fully featured app. As it is an ongoing project, please feel free to report bugs by emailing nhicdev@gmail.com. Please include your phone model in the report.</string>
+
+
+    <string name="prefVersion">NHIC การประยุกต์ รุ่น</string>
+
+    <string name="testerAck">Special thanks to the following people who let me try untested software on their phones. Thank you for all the initial bug reports, contributions, and encouragement.</string>
+    <string name ="nhicAck">To the NHIC staff, thank you for all your encouragement and support in to making this a reality. </string>
+
+    <string name="EULA">Copyright 2014 New Hope International Church. All rights reserved. This software may not be copied, reproduced, transmitted, reduced to any electronic medium or machine readable format without prior consent in writing from New Hope International Church or AppsForChrist. Users may not modify, translate, or decompile into its constituent source code. DISCLAIMER: User acknowledges that the software may not be free from defects and may not satisfy all user needs. In no event will New Hope International Church or AppsForChrist be held liable for direct, indirect, incidental or consequential damages. These damages cover defects on the device, or financial loss.   </string>
+</resources>
