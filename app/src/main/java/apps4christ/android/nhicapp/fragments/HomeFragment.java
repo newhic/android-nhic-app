@@ -15,6 +15,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import java.util.List;
+import java.util.Arrays;
+import java.lang.String;
 
 public class HomeFragment extends Fragment {
 
@@ -38,8 +41,6 @@ public class HomeFragment extends Fragment {
 
 		// Initialize the list of nearby places
 		valuesListView = (ListView) homeFragView.findViewById(R.id.valuesList);
-
-		valuesList = new ArrayList<String>();
 
 		populateValuesList();
 
@@ -70,9 +71,12 @@ public class HomeFragment extends Fragment {
 	}
 
 	public void populateValuesList() {
-		valuesList.add("Our Vision");
-		valuesList.add("Statement of Faith");
-		valuesList.add("Core Values");
+        String[] array;
+        List<String> list;
+
+        array = getResources().getStringArray(R.array.home_page_values);
+        list = Arrays.asList(array);
+        valuesList = new ArrayList<String>(list);
 	}
 
 }

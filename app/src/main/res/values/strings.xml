@@ -100,11 +100,28 @@
     <string name="statementOfFaithUrl"><a href="http://www.newhic.org/about/statement-of-faith">Statement of Faith</a></string>
     <string name="coreValuesUrl"><a href="http://www.newhic.org/about/core-values">Core Values</a></string>
 
+
+    <!-- Preference Fragment strings -->
+    <string name="prefLangCatTitle">Languages</string>
+    <string name="prefOthCatTitle">Other</string>
+    <string name="prefPolCatTitle">Privacy Policy</string>
+
+    <string name="prefLangTitle">Podcast Language</string>
+    <string name="prefLangSumm">Select the language you want podcast default to be in</string>
+
+    <string name="prefAbtTitle">About</string>
+    <string name="prefAbtSumm">About the developer and the NHIC app</string>
+
+    <string name="prefAckTitle">Acknowlegements</string>
+    <string name="prefAckSumm">The people who have made this app possible through their support</string>
+
+    <string name="prefPolTitle">Policy</string>
+
     <string name="aboutDev">Apps4Christ is a development team aimed at creating apps for church communities. As software engineers by trade, they hope to use their skills for the glory of God\'s kingdom! </string>
     <string name="aboutApp">The NHIC App was birthed when the Ohana caregroups started their weekly sermon listening. While it was much easier for iTunes users to get the podcasts, the rest of us had to rely on dropbox. Uploading and downloading the sermons proved to be a complicated process and a new way of doing things was needed. The NHIC App started off as a simple podcast application but slowly morphed into a fully featured app. As it is an ongoing project, please feel free to report bugs by emailing nhicdev@gmail.com. Please include your phone model in the report.</string>
 
 
-    <string name="version">NHIC App Version</string>
+    <string name="prefVersion">NHIC App Version</string>
 
     <string name="testerAck">Special thanks to the following people who let me try untested software on their phones. Thank you for all the initial bug reports, contributions, and encouragement.</string>
     <string name ="nhicAck">To the NHIC staff, thank you for all your encouragement and support in to making this a reality. </string>

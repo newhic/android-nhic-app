@@ -97,7 +97,7 @@ public class SettingsFragment extends PreferenceFragment {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		versionPref.setTitle(getString(R.string.version) + ": " + version + " "
+		versionPref.setTitle(getString(R.string.prefVersion) + ": " + version + " "
 				+ qualifier);
 	}
 
