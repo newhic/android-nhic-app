@@ -8,8 +8,8 @@
 
     <!-- Nav Drawer Menu Items -->
     <string-array name="nav_drawer_items">
-        <item>บ้าน</item>
-        <item>ประกาศ</item>
+        <item>หน้าหลัก</item>
+        <item>ข่าวประชาสัมพันธ์</item>
         <item>พอดคาสต์</item>
         <item>วิดีโอ</item>
         <item>การตั้งค่า</item>
@@ -17,9 +17,9 @@
 
     <!-- Home page vision, statement, values -->
     <string-array name="home_page_values">
-        <item>วิสัยทัศน์</item>
-        <item>คำแถลง</item>
-        <item>ค่านิยม</item>
+        <item>วิสัยทัศน์ของเรา</item>
+        <item>แถลงการณ์ของความเชื่อ</item>
+        <item>ค่านิยมหลัก</item>
     </string-array>
 
     <!-- Preference Fragment strings -->
@@ -33,7 +33,7 @@
     <string name="prefAbtTitle">เกี่ยวกับ</string>
     <string name="prefAbtSumm">About the developer and the NHIC app</string>
 
-    <string name="prefAckTitle">กิตติกรรมประกาศ</string> //Acknowledgements
+    <string name="prefAckTitle">แสดงความขอบคุณ</string> //Acknowledgements
     <string name="prefAckSumm">The people who have made this app possible through their support</string>
 
     <string name="prefPolTitle">นโยบาย</string> //Policy
@@ -43,7 +43,7 @@
     <string name="aboutApp">The NHIC App was birthed when the Ohana caregroups started their weekly sermon listening. While it was much easier for iTunes users to get the podcasts, the rest of us had to rely on dropbox. Uploading and downloading the sermons proved to be a complicated process and a new way of doing things was needed. The NHIC App started off as a simple podcast application but slowly morphed into a fully featured app. As it is an ongoing project, please feel free to report bugs by emailing nhicdev@gmail.com. Please include your phone model in the report.</string>
 
 
-    <string name="prefVersion">NHIC การประยุกต์ รุ่น</string>
+    <string name="prefVersion">NHIC รุ่น แอพพลิเคชัน</string>
 
     <string name="testerAck">Special thanks to the following people who let me try untested software on their phones. Thank you for all the initial bug reports, contributions, and encouragement.</string>
     <string name ="nhicAck">To the NHIC staff, thank you for all your encouragement and support in to making this a reality. </string>
