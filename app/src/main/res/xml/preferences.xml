@@ -35,6 +35,6 @@
         android:persistent="false"
         android:selectable="false"
         android:shouldDisableView="false"
-        android:title="@string/version" />
+        android:title="@string/prefVersion" />
 
 </PreferenceScreen>
