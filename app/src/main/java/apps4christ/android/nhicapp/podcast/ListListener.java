@@ -2,6 +2,7 @@ package apps4christ.android.nhicapp.podcast;
 
 import java.util.List;
 
+import apps4christ.android.nhicapp.audioplayer.AudioPlayerActivity;
 import apps4christ.android.nhicapp.main.WebActivity;
 
 import android.app.Activity;
@@ -24,24 +25,28 @@ public class ListListener implements OnItemClickListener {
 	}
 
 	/**
-	 * Start a browser with url from the rss item.
+	 * Start a browser or a media player with url from the rss item.
 	 */
 	public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
 		String url;
+        String podcastTitle;
 		Intent i;
 
-		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-			// only for KitKat and newer versions ( >= than 4.4)
-			i = new Intent(activity, WebActivity.class);
-		} else {
-			i = new Intent(Intent.ACTION_VIEW);
-		}
-		assert (i != null);
+        url = listItems.get(pos).getEnclosure();
 
-		// Get the url for the podcast
-		url = listItems.get(pos).getEnclosure();
+        if(url.contains(".mp3")) {
+            i = new Intent(activity, AudioPlayerActivity.class);
+            // Get the url for the podcast
+            url = listItems.get(pos).getEnclosure();
+            podcastTitle = listItems.get(pos).getTitle();
 
-		i.setData(Uri.parse(url));
+            i.putExtra("url", url);
+            i.putExtra("title", podcastTitle);
+        }else {
+            i = new Intent(activity, WebActivity.class);
+            url = listItems.get(pos).getEnclosure();
+            i.setData(Uri.parse(url));
+        }
 
 		activity.startActivity(i);
 

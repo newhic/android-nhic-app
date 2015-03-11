@@ -20,10 +20,10 @@ public class PodcastAdapter extends ArrayAdapter<RssItem> {
 
 	private LayoutInflater inflater;
 	private List<RssItem> datas; // original list
-	private List<RssItem> filteredData;
+	public List<RssItem> filteredData;
 	private List<RssItem> copyDatas; // copied list used to rebuild after
 										// canceling search
-	private ArrayList<RssItem> filteredItems;
+	public ArrayList<RssItem> filteredItems;
 	private PodcastFilter filter;
 
 	static class ViewHolder {
