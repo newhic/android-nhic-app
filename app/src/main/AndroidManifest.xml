@@ -25,6 +25,7 @@
         </activity>
         <activity android:name="apps4christ.android.nhicapp.main.WebActivity"></activity>
         <activity android:name="apps4christ.android.nhicapp.main.AboutActivity"></activity>
+        <activity android:name="apps4christ.android.nhicapp.audioplayer.AudioPlayerActivity"></activity>
     </application>
 
 </manifest>
