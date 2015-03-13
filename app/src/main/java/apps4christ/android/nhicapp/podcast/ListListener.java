@@ -3,6 +3,7 @@ package apps4christ.android.nhicapp.podcast;
 import java.util.List;
 
 import apps4christ.android.nhicapp.audioplayer.AudioPlayerActivity;
+import apps4christ.android.nhicapp.main.JSoupActivity;
 import apps4christ.android.nhicapp.main.WebActivity;
 
 import android.app.Activity;
@@ -43,7 +44,7 @@ public class ListListener implements OnItemClickListener {
             i.putExtra("url", url);
             i.putExtra("title", podcastTitle);
         }else {
-            i = new Intent(activity, WebActivity.class);
+            i = new Intent(activity, JSoupActivity.class);
             url = listItems.get(pos).getEnclosure();
             i.setData(Uri.parse(url));
         }

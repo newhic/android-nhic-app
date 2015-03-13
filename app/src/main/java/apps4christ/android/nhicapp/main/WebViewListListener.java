@@ -31,7 +31,7 @@ public class WebViewListListener implements OnItemClickListener {
 		String url;
 		Intent i;
 		
-		i = new Intent(activity, WebActivity.class);
+		i = new Intent(activity, JSoupActivity.class);
 		assert(i != null);
 		
 		// Get the url for the podcast
