@@ -16,6 +16,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 
 import android.widget.TextView;
+import org.jsoup.nodes.Element;
 
 import apps4christ.android.nhicapp.R;
 
@@ -40,6 +41,7 @@ public class JSoupActivity extends Activity {
     private class ParseContent extends AsyncTask<Void, Void, Void> {
         String title;
         String content;
+
         private View progressBar;
 
         @Override
@@ -51,12 +53,20 @@ public class JSoupActivity extends Activity {
 
         @Override
         protected Void doInBackground(Void... params) {
+            Elements links;
+
             try {
                 // Connect to the web site
                 Document document = Jsoup.connect(url).get();
-
+                content = "";
                 title = document.body().getElementsByTag("h1").text();
-                content = document.body().getElementsByTag("p").text();
+
+                links = document.select("p");
+                for(Element link : links) {
+                    content = content + System.getProperty("line.separator") + System.getProperty("line.separator") + link.text();
+                }
+
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
