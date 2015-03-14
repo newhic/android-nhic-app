@@ -46,14 +46,15 @@
     </LinearLayout>
     
     <!-- Player Footer -->
-    <LinearLayout 
+    <LinearLayout
         android:id="@+id/player_footer_bg"
         android:layout_width="fill_parent"
-        android:layout_height="100dp"
+        android:layout_height="170dp"
         android:layout_alignParentBottom="true"
         android:background="@layout/bg_player_footer"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:weightSum="1">
     	
         <!-- Player Buttons -->
         <LinearLayout
@@ -89,50 +90,55 @@
                 android:background="@null"/>
             <!-- Next Button -->
         </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/timerDisplay"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="0.27">
+            <!-- Current Duration Label -->
+            <TextView
+                android:id="@+id/songCurrentDurationLabel"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:textColor="#5d9aad"
+                android:textStyle="bold"/>
+            <!-- Total Duration Label -->
+            <TextView
+                android:id="@+id/songTotalDurationLabel"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:textColor="#5d9aad"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <SeekBar
+                android:id="@+id/songProgressBar"
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginRight="20dp"
+                 android:layout_marginLeft="20dp"
+                 android:layout_marginBottom="20dp"
+
+                 android:thumb="@drawable/seek_handler"
+                 android:progressDrawable="@drawable/seekbar_progress"
+                 android:paddingLeft="15dp"
+                 android:paddingRight="6dp"
+            android:indeterminate="false"/>
+
+
     </LinearLayout>
     
     <!-- Progress Bar/Seek bar -->
-    <SeekBar
-        	android:id="@+id/songProgressBar"
-	         android:layout_width="fill_parent"
-	         android:layout_height="wrap_content"
-	         android:layout_marginRight="20dp" 
-	         android:layout_marginLeft="20dp"
-	         android:layout_marginBottom="20dp"
-	    	 android:layout_above="@id/player_footer_bg"
-	    	 android:thumb="@drawable/seek_handler"
-	    	 android:progressDrawable="@drawable/seekbar_progress"
-	    	 android:paddingLeft="15dp"
-	    	 android:paddingRight="6dp"/>
-    
+
     <!-- Timer Display -->
-    <LinearLayout 
-        android:id="@+id/timerDisplay"
-        android:layout_above="@id/songProgressBar"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="10dp">
-        <!-- Current Duration Label -->
-        <TextView 
-            android:id="@+id/songCurrentDurationLabel"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="left"
-            android:textColor="#ffffff"
-            android:textStyle="bold"/>
-        <!-- Total Duration Label -->
-        <TextView 
-            android:id="@+id/songTotalDurationLabel"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="right"
-            android:textColor="#ffffff"
-            android:textStyle="bold"/>
-    </LinearLayout>
-    
+
     <!-- Repeat / Shuffle buttons -->
 </RelativeLayout>
