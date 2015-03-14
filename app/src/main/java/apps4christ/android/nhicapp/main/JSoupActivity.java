@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.view.View;
 import android.webkit.WebView;
 import android.os.AsyncTask;
 
@@ -39,10 +40,13 @@ public class JSoupActivity extends Activity {
     private class ParseContent extends AsyncTask<Void, Void, Void> {
         String title;
         String content;
+        private View progressBar;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+
+            progressBar = (View) findViewById(R.id.jSoupLoadingSpinner);
         }
 
         @Override
@@ -50,7 +54,7 @@ public class JSoupActivity extends Activity {
             try {
                 // Connect to the web site
                 Document document = Jsoup.connect(url).get();
-                // Get the html document title
+
                 title = document.body().getElementsByTag("h1").text();
                 content = document.body().getElementsByTag("p").text();
             } catch (IOException e) {
@@ -62,9 +66,11 @@ public class JSoupActivity extends Activity {
         @Override
         protected void onPostExecute(Void result) {
             // Set title into TextView
-            TextView txttitle = (TextView) findViewById(R.id.webTitle);
-            txttitle.setText(title);
-            txttitle.setTextSize(20);
+            progressBar.setVisibility(View.GONE);
+
+            TextView txtTitle = (TextView) findViewById(R.id.webTitle);
+            txtTitle.setText(title);
+            txtTitle.setTextSize(20);
 
             TextView txtContent = (TextView) findViewById(R.id.webContent);
             txtContent.setMovementMethod(new ScrollingMovementMethod());
