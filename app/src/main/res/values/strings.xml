@@ -3,13 +3,6 @@
 
     <string name="app_name">NHIC</string>
 
-    <string name="title_section1">Home</string>
-    <string name="title_section2">Announcements</string>
-    <string name="title_section3">Podcasts</string>
-    <string name="title_section4">Videos</string>
-    <string name="title_section5">Online Giving</string>
-    <string name="title_section6">Settings</string>
-
     <string name="defaultSermon">God Is Good</string>
     <string name="defaultPastor">Ps. Varun Laohaprasit MD</string>
     <string name="defaultDate">March 14, 2014</string>
@@ -17,7 +10,6 @@
     <string name="defaultAnnouncement">NHIC News!</string>
     <string name="defaultAnnouncementDesc">There is church on Sunday!</string>
     <string name="desc_list_item_icon">Item Icon</string>
-    <string name="youTubeThumbnail">YouTube Video Thumbnail</string>
     <string name="defaultText">This page is currently under construction</string>
 
 
