@@ -135,16 +135,6 @@ public class VideosFragment extends Fragment {
         }
 
         @Override
-        public View getVideoLoadingProgressView() {
-
-            if (mVideoProgressView == null) {
-                LayoutInflater inflater = getActivity().getLayoutInflater();
-                mVideoProgressView = inflater.inflate(R.layout.video_progress, null);
-            }
-            return mVideoProgressView;
-        }
-
-        @Override
         public void onHideCustomView() {
             super.onHideCustomView();    //To change body of overridden methods use File | Settings | File Templates.
             if (mCustomView == null)

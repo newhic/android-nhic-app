@@ -205,7 +205,7 @@ public class AnnounceFragment extends Fragment {
 
 				// Create a list adapter
 				announceAdapter = new AnnounceAdapter(m_activity,
-						R.layout.videos_item_row, result);
+						R.layout.announcement_item_row, result);
 
 				// Set list adapter for the ListView
 				nhicItems.setAdapter(announceAdapter);
