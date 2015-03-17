@@ -4,7 +4,6 @@ import java.util.List;
 
 import apps4christ.android.nhicapp.audioplayer.AudioPlayerActivity;
 import apps4christ.android.nhicapp.main.JSoupActivity;
-import apps4christ.android.nhicapp.main.WebActivity;
 
 import android.app.Activity;
 import android.content.Intent;

@@ -9,4 +9,5 @@
     <color name="counter_text_color">#c5c4c4</color>
     <color name="church_bg_color">#5d9aad</color>
     <color name="spinner_bg_color">#ffffff</color>
+    <color name="podcast_bg_color">#323467</color>
 </resources>

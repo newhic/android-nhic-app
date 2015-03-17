@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" 
-    android:background="#323467">
+    android:background="@color/podcast_bg_color">
     
     <!-- Player Header -->
     <LinearLayout 
@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="#5d9aad"
+            android:textColor="@color/church_bg_color"
             android:textSize="16dp"
             android:paddingLeft="10dp"
             android:textStyle="bold"
@@ -91,6 +91,7 @@
             <!-- Next Button -->
         </LinearLayout>
 
+        <!-- Timer Display -->
         <LinearLayout
             android:id="@+id/timerDisplay"
             android:layout_width="fill_parent"
@@ -115,10 +116,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="end"
-                android:textColor="#5d9aad"
+                android:textColor="@color/church_bg_color"
                 android:textStyle="bold"/>
         </LinearLayout>
 
+        <!-- Progress Bar/Seek bar -->
         <SeekBar
                 android:id="@+id/songProgressBar"
                  android:layout_width="fill_parent"
@@ -135,10 +137,5 @@
 
 
     </LinearLayout>
-    
-    <!-- Progress Bar/Seek bar -->
 
-    <!-- Timer Display -->
-
-    <!-- Repeat / Shuffle buttons -->
 </RelativeLayout>

@@ -1,6 +1,5 @@
 package apps4christ.android.nhicapp.main;
 
-import apps4christ.android.nhicapp.main.WebActivity;
 
 import android.app.Activity;
 import android.content.Intent;
