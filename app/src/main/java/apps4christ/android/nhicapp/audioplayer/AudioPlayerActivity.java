@@ -19,8 +19,6 @@ public class AudioPlayerActivity extends Activity implements SeekBar.OnSeekBarCh
 	private ImageButton btnPlay;
 	private ImageButton btnForward;
 	private ImageButton btnBackward;
-	private ImageButton btnNext;
-	private ImageButton btnPrevious;
 	private SeekBar songProgressBar;
 	private TextView songTitleLabel;
 	private TextView songCurrentDurationLabel;
@@ -36,6 +34,7 @@ public class AudioPlayerActivity extends Activity implements SeekBar.OnSeekBarCh
     private Intent intent;
     private String url;
     private String podcastTitle;
+    static final String PODCAST_POS = "podcastPos";
 	
 
 	@Override
@@ -51,7 +50,7 @@ public class AudioPlayerActivity extends Activity implements SeekBar.OnSeekBarCh
 		songTitleLabel = (TextView) findViewById(R.id.songTitle);
 		songCurrentDurationLabel = (TextView) findViewById(R.id.songCurrentDurationLabel);
 		songTotalDurationLabel = (TextView) findViewById(R.id.songTotalDurationLabel);
-		
+
 		// Mediaplayer
 		mp = new MediaPlayer();
 		utils = new Utilities();
@@ -61,11 +60,17 @@ public class AudioPlayerActivity extends Activity implements SeekBar.OnSeekBarCh
         podcastTitle = intent.getStringExtra("title");
 		
 		// Listeners
-		songProgressBar.setOnSeekBarChangeListener(this); // Important
-		//mp.setOnCompletionListener(this); // Important
+		songProgressBar.setOnSeekBarChangeListener(this);
 
-		// By default play first song
-		playPodcast(url);
+        /**
+         * If a user rotates screen orientation, we want the seekbar to remain where it last
+         * was, instead of going back to the start of the podcast.
+         */
+        if(savedInstanceState != null) {
+            playPodcast(url, savedInstanceState.getInt(PODCAST_POS));
+        } else {
+            playPodcast(url, 0);
+        }
 
 				
 		/**
@@ -106,9 +111,9 @@ public class AudioPlayerActivity extends Activity implements SeekBar.OnSeekBarCh
 			public void onClick(View arg0) {
 				// get current song position				
 				int currentPosition = mp.getCurrentPosition();
-				// check if seekForward time is lesser than song duration
+				// check if seekForward time is lesser than podcast duration
 				if(currentPosition + seekForwardTime <= mp.getDuration()){
-					// forward song
+					// forward podcast
 					mp.seekTo(currentPosition + seekForwardTime);
 				}else{
 					// forward to end position
@@ -129,7 +134,7 @@ public class AudioPlayerActivity extends Activity implements SeekBar.OnSeekBarCh
 				int currentPosition = mp.getCurrentPosition();
 				// check if seekBackward time is greater than 0 sec
 				if(currentPosition - seekBackwardTime >= 0){
-					// forward song
+					// forward podcast
 					mp.seekTo(currentPosition - seekBackwardTime);
 				}else{
 					// backward to starting position
@@ -141,11 +146,22 @@ public class AudioPlayerActivity extends Activity implements SeekBar.OnSeekBarCh
 
 	}
 
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        // Save the user's current podcast position
+
+        int currentPosition = mp.getCurrentPosition();
+        savedInstanceState.putInt(PODCAST_POS, currentPosition);
+
+        // Always call the superclass so it can save the view hierarchy state
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
 	/**
-	 * Function to play a song
+	 * Function to play a podcast
 	 * @param url - url of podcast
 	 * */
-	public void  playPodcast(String url){
+	public void  playPodcast(String url, int position){
 		// Play podcast
 		try {
 
@@ -153,16 +169,16 @@ public class AudioPlayerActivity extends Activity implements SeekBar.OnSeekBarCh
             mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
 			mp.setDataSource(url);
 			mp.prepare();
+
+            mp.seekTo(position);
 			mp.start();
-			// Displaying Song title
-			String songTitle = "Test Sermon";
         	songTitleLabel.setText(podcastTitle);
 			
         	// Changing Button Image to pause image
 			btnPlay.setImageResource(R.drawable.btn_pause);
 			
 			// set Progress bar values
-			songProgressBar.setProgress(0);
+			songProgressBar.setProgress(position);
 			songProgressBar.setMax(100);
 			
 			// Updating progress bar
@@ -224,7 +240,7 @@ public class AudioPlayerActivity extends Activity implements SeekBar.OnSeekBarCh
     }
 	
 	/**
-	 * When user stops moving the progress hanlder
+	 * When user stops moving the progress handler
 	 * */
 	@Override
     public void onStopTrackingTouch(SeekBar seekBar) {
