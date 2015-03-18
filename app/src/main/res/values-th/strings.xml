@@ -42,7 +42,7 @@
     <!-- Podcast Language Selector Items -->
     <string-array name="podcast_lang_select">
         <item>English</item>
-        <item>คนไทย</item>
+        <item>ไทย</item>
         <item>中文</item>
         <item>日本の</item>
         <item>Deutsch</item>
