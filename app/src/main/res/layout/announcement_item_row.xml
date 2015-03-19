@@ -11,7 +11,8 @@
         android:ellipsize="end"
         android:maxLines="2"
         android:text="@string/defaultAnnouncement"
-        android:textSize="16sp" />
+        android:textStyle="bold"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/announcementDate"
