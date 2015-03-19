@@ -2,6 +2,7 @@ package apps4christ.android.nhicapp.main;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
@@ -80,6 +81,7 @@ public class JSoupActivity extends Activity {
 
             TextView txtTitle = (TextView) findViewById(R.id.webTitle);
             txtTitle.setText(title);
+            txtTitle.setTypeface(null, Typeface.BOLD);
             txtTitle.setTextSize(20);
 
             TextView txtContent = (TextView) findViewById(R.id.webContent);
