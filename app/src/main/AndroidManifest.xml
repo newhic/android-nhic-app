@@ -24,8 +24,11 @@
             </intent-filter>
         </activity>
         <activity android:name="apps4christ.android.nhicapp.main.AboutActivity"></activity>
+
         <activity android:name="apps4christ.android.nhicapp.audioplayer.AudioPlayerActivity"></activity>
-        <activity android:name="apps4christ.android.nhicapp.main.JSoupActivity"></activity>
+
+        <activity android:name="apps4christ.android.nhicapp.main.JSoupActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"></activity>
     </application>
 
 </manifest>
