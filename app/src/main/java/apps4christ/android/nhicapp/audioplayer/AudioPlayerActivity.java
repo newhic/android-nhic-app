@@ -35,6 +35,8 @@ public class AudioPlayerActivity extends Activity implements SeekBar.OnSeekBarCh
     private String url;
     private String podcastTitle;
     static final String PODCAST_POS = "podcastPos";
+    static final String PODCAST_URL = "podcastUrl";
+    static final String PODCAST_TITLE = "podcastTitle";
 	
 
 	@Override
@@ -51,28 +53,18 @@ public class AudioPlayerActivity extends Activity implements SeekBar.OnSeekBarCh
 		songCurrentDurationLabel = (TextView) findViewById(R.id.songCurrentDurationLabel);
 		songTotalDurationLabel = (TextView) findViewById(R.id.songTotalDurationLabel);
 
-		// Mediaplayer
-		mp = new MediaPlayer();
-		utils = new Utilities();
+        // Mediaplayer
+        mp = new MediaPlayer();
+        utils = new Utilities();
 
         intent = getIntent();
         url = intent.getStringExtra("url");
         podcastTitle = intent.getStringExtra("title");
-		
-		// Listeners
-		songProgressBar.setOnSeekBarChangeListener(this);
+        playPodcast(url, 0);
 
-        /**
-         * If a user rotates screen orientation, we want the seekbar to remain where it last
-         * was, instead of going back to the start of the podcast.
-         */
-        if(savedInstanceState != null) {
-            playPodcast(url, savedInstanceState.getInt(PODCAST_POS));
-        } else {
-            playPodcast(url, 0);
-        }
+        // Listeners
+        songProgressBar.setOnSeekBarChangeListener(this);
 
-				
 		/**
 		 * Play button click event
 		 * plays a song and changes button to pause image
@@ -152,9 +144,21 @@ public class AudioPlayerActivity extends Activity implements SeekBar.OnSeekBarCh
 
         int currentPosition = mp.getCurrentPosition();
         savedInstanceState.putInt(PODCAST_POS, currentPosition);
+        savedInstanceState.putString(PODCAST_URL, url);
+        savedInstanceState.putString(PODCAST_TITLE, podcastTitle);
 
         // Always call the superclass so it can save the view hierarchy state
         super.onSaveInstanceState(savedInstanceState);
+    }
+
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        // Always call the superclass so it can restore the view hierarchy
+        super.onRestoreInstanceState(savedInstanceState);
+
+        // Restore state members from saved instance
+        url = savedInstanceState.getString(PODCAST_URL);
+        podcastTitle = savedInstanceState.getString(PODCAST_TITLE);
+        playPodcast(url, savedInstanceState.getInt(PODCAST_POS));
     }
 
 	/**
@@ -213,7 +217,7 @@ public class AudioPlayerActivity extends Activity implements SeekBar.OnSeekBarCh
 			   songCurrentDurationLabel.setText(""+utils.milliSecondsToTimer(currentDuration));
 			   
 			   // Updating progress bar
-			   int progress = (int)(utils.getProgressPercentage(currentDuration, totalDuration));
+			   int progress = (utils.getProgressPercentage(currentDuration, totalDuration));
 			   //Log.d("Progress", ""+progress);
 			   songProgressBar.setProgress(progress);
 			   
