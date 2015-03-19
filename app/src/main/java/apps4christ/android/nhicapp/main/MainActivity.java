@@ -1,7 +1,6 @@
 package apps4christ.android.nhicapp.main;
 
 import apps4christ.android.nhicapp.fragments.AnnounceFragment;
-import apps4christ.android.nhicapp.fragments.GivingFragment;
 import apps4christ.android.nhicapp.fragments.HomeFragment;
 import apps4christ.android.nhicapp.fragments.PodcastFragment;
 import apps4christ.android.nhicapp.fragments.VideosFragment;
