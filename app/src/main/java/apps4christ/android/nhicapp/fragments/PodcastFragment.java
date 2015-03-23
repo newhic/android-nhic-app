@@ -65,12 +65,12 @@ public class PodcastFragment extends Fragment {
 		// false
 
 		if (isInternetPresent) {
+            CreateLanguageDropDown();
 			EnableSearch();
 		} else {
 			cd.showAlertDialog();
 		}
 
-		CreateLanguageDropDown();
 
 		dbgTracker = GoogleAnalytics.getInstance(podcastFragView.getContext())
 				.newTracker("UA-51856239-1");
