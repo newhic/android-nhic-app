@@ -13,7 +13,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.safety.Whitelist;
 import org.jsoup.select.Elements;
-
+import apps4christ.android.nhicapp.main.ConnectionDetector;
 import java.io.IOException;
 
 import android.widget.TextView;
@@ -35,7 +35,15 @@ public class JSoupActivity extends Activity {
         intent = getIntent();
         url = intent.getDataString();
 
-        new ParseContent().execute();
+        ConnectionDetector cd = new ConnectionDetector(
+                this);
+
+        Boolean isInternetPresent = cd.isConnectingToInternet();
+
+        if(isInternetPresent)
+            new ParseContent().execute();
+        else
+            cd.showAlertDialog();
     }
 
     // Title AsyncTask
