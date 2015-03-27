@@ -71,9 +71,10 @@ public class PodcastFragment extends Fragment {
 			cd.showAlertDialog();
 		}
 
+        String trackerId =  getResources().getString(R.string.trackingId);
 
 		dbgTracker = GoogleAnalytics.getInstance(podcastFragView.getContext())
-				.newTracker("UA-51856239-1");
+				.newTracker(trackerId);
 
 		return rootView;
 	}

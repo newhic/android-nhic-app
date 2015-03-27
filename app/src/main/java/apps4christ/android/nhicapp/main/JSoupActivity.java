@@ -18,6 +18,9 @@ import java.io.IOException;
 
 import android.widget.TextView;
 import org.jsoup.nodes.Element;
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import apps4christ.android.nhicapp.R;
 
@@ -27,6 +30,7 @@ import apps4christ.android.nhicapp.R;
 public class JSoupActivity extends Activity {
     private String url;
     private Intent intent;
+    Tracker dbgTracker;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +48,20 @@ public class JSoupActivity extends Activity {
             new ParseContent().execute();
         else
             cd.showAlertDialog();
+
+        String trackerId =  getResources().getString(R.string.trackingId);
+
+        dbgTracker = GoogleAnalytics.getInstance(this)
+                .newTracker(trackerId);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        dbgTracker.setScreenName("HTML Content");
+        dbgTracker.send(new HitBuilders.AppViewBuilder().build());
+
     }
 
     // Title AsyncTask

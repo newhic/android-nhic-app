@@ -55,8 +55,10 @@ public class HomeFragment extends Fragment {
 				homeFragView.getResources().getStringArray(
 						R.array.homepage_links_array), getActivity()));
 
+        String trackerId =  getResources().getString(R.string.trackingId);
+
 		dbgTracker = GoogleAnalytics.getInstance(homeFragView.getContext())
-				.newTracker("UA-51856239-1");
+				.newTracker(trackerId);
 
 		return rootView;
 	}

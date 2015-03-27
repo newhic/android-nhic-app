@@ -13,6 +13,9 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import apps4christ.android.nhicapp.R;
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 public class AudioPlayerActivity extends Activity implements SeekBar.OnSeekBarChangeListener {
 
@@ -37,7 +40,8 @@ public class AudioPlayerActivity extends Activity implements SeekBar.OnSeekBarCh
     static final String PODCAST_POS = "podcastPos";
     static final String PODCAST_URL = "podcastUrl";
     static final String PODCAST_TITLE = "podcastTitle";
-	
+
+    Tracker dbgTracker;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -136,7 +140,22 @@ public class AudioPlayerActivity extends Activity implements SeekBar.OnSeekBarCh
 			}
 		});
 
-	}
+        String trackerId =  getResources().getString(R.string.trackingId);
+
+        dbgTracker = GoogleAnalytics.getInstance(this)
+                .newTracker(trackerId);
+
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        dbgTracker.setScreenName("Podcast Audioplayer");
+        dbgTracker.send(new HitBuilders.AppViewBuilder().build());
+
+    }
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {

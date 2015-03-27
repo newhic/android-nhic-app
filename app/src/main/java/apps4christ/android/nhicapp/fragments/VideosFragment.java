@@ -70,8 +70,10 @@ public class VideosFragment extends Fragment {
 			cd.showAlertDialog();
 		}
 
+        String trackerId =  getResources().getString(R.string.trackingId);
+
 		dbgTracker = GoogleAnalytics.getInstance(videosFragView.getContext())
-				.newTracker("UA-51856239-1");
+				.newTracker(trackerId);
 
 		return rootView;
 	}

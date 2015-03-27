@@ -67,8 +67,10 @@ public class AnnounceFragment extends Fragment {
 		else
 			cd.showAlertDialog();
 
+        String trackerId =  getResources().getString(R.string.trackingId);
+
 		dbgTracker = GoogleAnalytics.getInstance(announceFragView.getContext())
-				.newTracker("UA-51856239-1");
+				.newTracker(trackerId);
 
 		return rootView;
 	}
