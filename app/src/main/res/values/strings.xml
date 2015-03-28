@@ -68,9 +68,9 @@
 
     <!-- Home page vision, statement, values -->
     <string-array name="home_page_values">
-        <item>Vision</item>
-        <item>Statement</item>
-        <item>Values</item>
+        <item>Our Vision</item>
+        <item>Statement of Faith</item>
+        <item>Core Values</item>
     </string-array>
 
     <!-- HomePage URLs -->
