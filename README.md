@@ -14,6 +14,8 @@ Many online guides will show setup procedures for Eclipse SDK development. Howev
 
 ### Setting Up ###
 
+We will be following a Feature Branch workflow. What that means is that, for every feature, the developer will have their own branch to work with. Once they are done with that feature, they issue a pull request for their changes to be merged into the master repository. All releases will be cut from the master repository.
+
 1. Open Android Studio and update to the latest version before checking out the project from source control. You will have to restart Android Studio once the update is done. 
 
 2. Check out the New Hope International Android App project by clicking on "Check out project from Version Control". It will give you an option to check out from different sources. Click on Git. 
