@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">NHIC</string>
+    <string name ="trackingId">UA-51856239-1</string>
 
     <string name="defaultSermon">God Is Good</string>
     <string name="defaultPastor">Ps. Varun Laohaprasit MD</string>
