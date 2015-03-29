@@ -36,13 +36,15 @@ Once you have completed making your own feature branch, you are ready to check o
 
 4. Navigate to a local directory you want to store the project
 
-5. Give it a appropriate directory name such as NHIC-Android-App. Make sure you are checking out your own feature branch. You will not be able to commit to master. 
+5. Give it a appropriate directory name such as NHIC-Android-App. 
 
 6. Press ok and it will start the clone process for you. Once done, it will confirm that you have checked out an Android Studio project file and will ask if you want to open it. Press yes. 
 
 7. A menu will pop up called "Import Project from Gradle". Make sure that it the "use default gradle wrapper (recommended)" radio button is selected. Press OK. 
 
-8. It will take a few minutes to build the Gradle project files. When the run button is no longer grayed out, test that everything has built properly by running and emulating the app on the provided Nexus 5 emulation image.
+8. Click on VCS->Git->Branches and select the feature branch you have created. Choose checkout as new local branch. This is the branch you should be working in. If you are in master, you will not be able to check in any of your changes. 
+
+9. It will take a few minutes to build the Gradle project files. When the run button is no longer grayed out, test that everything has built properly by running and emulating the app on the provided Nexus 5 emulation image.
 
 ### Contribution guidelines ###
 
