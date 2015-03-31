@@ -3,9 +3,14 @@ package apps4christ.android.nhicapp.fragments;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import org.apache.http.impl.cookie.DateParseException;
+import org.apache.http.impl.cookie.DateUtils;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -112,8 +117,13 @@ public class AnnounceFragment extends Fragment {
 	 * This routine is the way Android recommends us to parse RSS but at this
 	 * point March 9, 2014 it seems to run very slow even for a short list. The
 	 * SAX way seems faster
+	 *
+	 * TODO: Should probably extract this into a separate file
+	 * TODO: Push this into a queue that is consumed by the view
+	 *
 	 */
 	public static void XMLPullParserRoutine() {
+
 		boolean insideItem = false;
 		// Used to reference item while parsing
 
@@ -144,8 +154,18 @@ public class AnnounceFragment extends Fragment {
 						if (insideItem)
 							currentItem.setContent(xpp.nextText());
 					} else if (xpp.getName().equalsIgnoreCase("pubDate")) {
-						if (insideItem)
-							currentItem.setPubDate(xpp.nextText());
+						if (insideItem) {
+							Date pubDate = null;
+							String nextText = xpp.nextText();
+							try {
+								pubDate = DateUtils.parseDate(nextText);
+							} catch (DateParseException e) {
+								Log.e("AnnounceFragment", "Error in parsing date!");
+							}
+							Log.d("AnnounceFragment", nextText);
+							currentItem.setPubDate(pubDate);
+						}
+
 					} else if (xpp.getName().equalsIgnoreCase("link")) {
 						if (insideItem)
 							currentItem.setEnclosure(xpp.nextText());

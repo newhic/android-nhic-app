@@ -1,8 +1,12 @@
 package apps4christ.android.nhicapp.podcast;
 
+import android.util.Log;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import org.apache.http.impl.cookie.DateParseException;
+import org.apache.http.impl.cookie.DateUtils;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -96,7 +100,17 @@ public class RssParseHandler extends DefaultHandler {
 			}
 		} else if (parsingPubDate) {
 			if (currentItem != null) {
-				currentItem.setPubDate(buf.toString());
+				Date pubDate = null;
+				try {
+					pubDate = DateUtils.parseDate(buf.toString());
+				} catch (DateParseException e) {
+					// Think this happens because the buffer flushed before a full date
+					// could be parsed.
+					Log.e("RssParseHandler", "Could not parse Date.");
+				}
+				if (pubDate != null) {
+					currentItem.setPubDate(pubDate);
+				}
 			}
 		} else if (parsingAuthor) {
 			if (currentItem != null) {

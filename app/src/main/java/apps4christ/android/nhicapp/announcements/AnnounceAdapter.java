@@ -1,10 +1,13 @@
 package apps4christ.android.nhicapp.announcements;
 
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +58,17 @@ public class AnnounceAdapter extends ArrayAdapter<RssItem> {
 		}
 
 		viewHolder.titleView.setText(datas.get(position).getTitle());
-		viewHolder.dateView.setText(datas.get(position).getPubDate());
+
+		Date pubDate = datas.get(position).getPubDate();
+		String pubDateString;
+		if (pubDate != null) {
+			pubDateString = DateFormat.getDateInstance().format(pubDate);
+		} else {
+			pubDateString = "";
+			Log.e("AnnounceAdapter", "Error in parsing date!");
+		}
+		viewHolder.dateView.setText(pubDateString);
+		
 		viewHolder.descView.setText(datas.get(position).getAuthor());
 
 		return convertView;

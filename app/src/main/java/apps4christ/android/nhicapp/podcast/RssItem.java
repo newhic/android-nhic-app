@@ -2,10 +2,12 @@ package apps4christ.android.nhicapp.podcast;
 
 /* This class stores the contents extracted from the NHIC Rss Feed. */
 
+import java.util.Date;
+
 public class RssItem {
 	private String title;
 	private String enclosure; /* link, url */
-	private String pubDate;
+	private Date pubDate;
 	private String author;
 	private String duration;
 	private String content;
@@ -28,10 +30,10 @@ public class RssItem {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-	public String getPubDate() {
+	public Date getPubDate() {
 		return pubDate;
 	}
-	public void setPubDate(String pubDate) {
+	public void setPubDate(Date pubDate) {
 		this.pubDate = pubDate;
 	}
 	public String getTitle() {
