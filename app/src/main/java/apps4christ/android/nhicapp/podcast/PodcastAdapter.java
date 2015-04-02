@@ -1,6 +1,8 @@
 package apps4christ.android.nhicapp.podcast;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -55,7 +57,7 @@ public class PodcastAdapter extends ArrayAdapter<RssItem> {
 
 		return filter;
 	}
-	
+
 	public void resetData(){
 		filteredData = datas;
 	}
@@ -68,7 +70,7 @@ public class PodcastAdapter extends ArrayAdapter<RssItem> {
 
 			viewHolder = new ViewHolder();
 			assert(viewHolder != null);
-			
+
 			Log.d("PodcastAdapter", "Setting the variables");
 			viewHolder.titleView = (TextView) convertView
 					.findViewById(R.id.sermonTitle);
@@ -84,7 +86,17 @@ public class PodcastAdapter extends ArrayAdapter<RssItem> {
 		}
 
 		viewHolder.titleView.setText(filteredData.get(position).getTitle());
-		viewHolder.dateView.setText(filteredData.get(position).getPubDate());
+
+		Date pubDate = filteredData.get(position).getPubDate();
+		String pubDateString;
+		if (pubDate != null) {
+			pubDateString = DateFormat.getDateInstance().format(pubDate);
+		} else {
+			pubDateString = "";
+			Log.e("PodcastAdapter", "Unable to find pubDate from rss data!");
+		}
+		viewHolder.dateView.setText(pubDateString);
+
 		viewHolder.pastorView.setText(filteredData.get(position).getAuthor());
 		viewHolder.durationView.setText(filteredData.get(position).getDuration());
 
@@ -126,12 +138,14 @@ public class PodcastAdapter extends ArrayAdapter<RssItem> {
 		public boolean foundMatch(RssItem rssItem, CharSequence constraint) {
 			String title;
 			String author;
-			String pubDate;
+			Date pubDate;
+			String pubDateString;
 
 			title = rssItem.getTitle().toLowerCase(Locale.ENGLISH);
-			pubDate = rssItem.getPubDate().toLowerCase(Locale.ENGLISH);
+			pubDate = rssItem.getPubDate();
+			pubDateString = DateFormat.getDateInstance().format(pubDate);
 
-			if (title.contains(constraint) || pubDate.contains(constraint))
+			if (title.contains(constraint))
 				return true;
 
 			author = rssItem.getAuthor();
