@@ -68,67 +68,49 @@ public class RssParseHandler extends DefaultHandler {
 		if ("item".equals(qName)) {
 			rssItems.add(currentItem);
 			currentItem = null;
-		} else if ("title".equals(qName)) {
-			parsingTitle = false;
-		} else if ("enclosure".equals(qName)) {
-			parsingEnclosure = false;
-		} else if ("pubDate".equals(qName)) {
-			parsingPubDate = false;
-		} else if ("itunes:author".equals(qName)) {
-			parsingAuthor = false;
-		} else if ("itunes:duration".equals(qName)) {
-			parsingDuration = false;
-		} else if ("link".equals(qName)) {
-			parsingLink = false;
-		} else if ("description".equals(qName)) {
-			parsingDesc = false;
+		}
+		if (currentItem != null) {
+			if ("title".equals(qName)) {
+				currentItem.setTitle(buf.toString());
+				parsingTitle = false;
+			} else if ("enclosure".equals(qName)) {
+				// Don't think this should be here.
+				// currentItem.setEnclosure(buf.toString());
+				parsingEnclosure = false;
+			} else if ("pubDate".equals(qName)) {
+				Date pubDate = null;
+				try {
+					String parseDateString = buf.toString();
+					pubDate = DateUtils.parseDate(buf.toString());
+				} catch (DateParseException e) {
+					Log.e("RssParseHandler", "Could not parse Date!");
+				}
+				if (pubDate != null) {
+					currentItem.setPubDate(pubDate);
+				} else {
+					Log.e("RssParseHandler", "Could not parse Date!");
+				}
+				parsingPubDate = false;
+			} else if ("itunes:author".equals(qName)) {
+				currentItem.setAuthor(buf.toString());
+				parsingAuthor = false;
+			} else if ("itunes:duration".equals(qName)) {
+				currentItem.setDuration(buf.toString());
+				parsingDuration = false;
+			} else if ("link".equals(qName)) {
+				currentItem.setEnclosure(buf.toString());
+				parsingLink = false;
+			} else if ("description".equals(qName)) {
+				currentItem.setContent(buf.toString());
+				parsingDesc = false;
+			}
 		}
 	}
 
 	@Override
 	public void characters(char[] ch, int start, int length)
 			throws SAXException {
-
 		buf.append(ch, start, length);
-
-		if (parsingTitle) {
-			if (currentItem != null)
-				currentItem.setTitle(buf.toString());
-		} else if (parsingEnclosure) {
-			if (currentItem != null) {
-				currentItem.setEnclosure(buf.toString());
-			}
-		} else if (parsingPubDate) {
-			if (currentItem != null) {
-				Date pubDate = null;
-				try {
-					pubDate = DateUtils.parseDate(buf.toString());
-				} catch (DateParseException e) {
-					// Think this happens because the buffer flushed before a full date
-					// could be parsed.
-					Log.e("RssParseHandler", "Could not parse Date.");
-				}
-				if (pubDate != null) {
-					currentItem.setPubDate(pubDate);
-				}
-			}
-		} else if (parsingAuthor) {
-			if (currentItem != null) {
-				currentItem.setAuthor(buf.toString());
-			}
-		} else if (parsingDuration) {
-			if (currentItem != null) {
-				currentItem.setDuration(buf.toString());
-			}
-		} else if (parsingLink) {
-			if (currentItem != null) {
-				currentItem.setEnclosure(buf.toString());
-			}
-		} else if (parsingDesc) {
-			if (currentItem != null) {
-				currentItem.setContent(buf.toString());
-			}
-		}
 	}
 
 }
