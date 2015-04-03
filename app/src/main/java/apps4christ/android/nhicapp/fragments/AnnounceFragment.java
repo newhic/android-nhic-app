@@ -43,6 +43,7 @@ public class AnnounceFragment extends Fragment {
 	private static RssItem currentItem;
 	private RSSTask task = null;
 	private Tracker dbgTracker;
+    private View spinnerView;
 
 	public AnnounceFragment() {
 	}
@@ -55,6 +56,9 @@ public class AnnounceFragment extends Fragment {
 				false);
 
 		announceFragView = rootView;
+
+        spinnerView = (View) announceFragView
+                .findViewById(R.id.announceloadingSpinner);
 
 		rssList = new ArrayList<RssItem>();
 		/* Check for internet connectivity to avoid exceptions */
@@ -69,8 +73,10 @@ public class AnnounceFragment extends Fragment {
 		 */
 		if (isInternetPresent)
 			CreateRSSService();
-		else
-			cd.showAlertDialog();
+		else {
+            cd.showAlertDialog();
+            spinnerView.setVisibility(View.GONE);
+        }
 
         String trackerId =  getResources().getString(R.string.trackingId);
 

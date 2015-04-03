@@ -45,6 +45,7 @@ public class PodcastFragment extends Fragment {
 	private ActionBar bar;
 	private RSSTask task = null;
 	private Tracker dbgTracker;
+    private View spinnerView;
 
 	public PodcastFragment() {
 	}
@@ -56,6 +57,9 @@ public class PodcastFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.podcast_main, container,
 				false);
 		podcastFragView = rootView;
+
+        spinnerView = (View) podcastFragView
+                .findViewById(R.id.podcastloadingSpinner);
 
 		/* Check for internet connectivity to avoid exceptions */
 		ConnectionDetector cd = new ConnectionDetector(
@@ -69,6 +73,7 @@ public class PodcastFragment extends Fragment {
 			EnableSearch();
 		} else {
 			cd.showAlertDialog();
+            spinnerView.setVisibility(View.GONE);
 		}
 
         String trackerId =  getResources().getString(R.string.trackingId);
