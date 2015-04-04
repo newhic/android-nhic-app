@@ -211,7 +211,9 @@ public class PodcastFragment extends Fragment {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		task.m_activity = null;
+
+        if(task != null)
+		    task.m_activity = null;
 	}
 
 	static class RSSTask extends AsyncTask<String, Void, List<RssItem>> {
