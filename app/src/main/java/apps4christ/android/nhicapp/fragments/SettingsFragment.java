@@ -4,12 +4,14 @@ import apps4christ.android.nhicapp.prefsfrag.AboutFragment;
 import apps4christ.android.nhicapp.prefsfrag.AcknFragment;
 import apps4christ.android.nhicapp.prefsfrag.LicenseFragment;
 import apps4christ.android.nhicapp.R;
+import apps4christ.android.nhicapp.BuildConfig;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
@@ -89,7 +91,11 @@ public class SettingsFragment extends PreferenceFragment {
 
 		versionPref = (EditTextPreference) findPreference("version");
 		version = "";
-		qualifier = "";
+        if(BuildConfig.DEBUG)
+		    qualifier = "Beta";
+        else{
+            qualifier = "";
+        }
 		try {
 			version = getActivity().getPackageManager().getPackageInfo(
 					getActivity().getPackageName(), 0).versionName;
