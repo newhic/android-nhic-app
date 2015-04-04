@@ -11,6 +11,8 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import apps4christ.android.nhicapp.data.RssItem;
+
 public class RssParseHandler extends DefaultHandler {
 
 	private List<RssItem> rssItems;

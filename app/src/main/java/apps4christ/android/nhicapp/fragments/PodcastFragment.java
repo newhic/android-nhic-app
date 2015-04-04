@@ -1,12 +1,14 @@
 package apps4christ.android.nhicapp.fragments;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.ActionBar;
-import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,13 +21,11 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.app.ActionBar.OnNavigationListener;
 import android.content.SharedPreferences;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar.*;
 
 import apps4christ.android.nhicapp.main.ConnectionDetector;
 import apps4christ.android.nhicapp.podcast.ListListener;
 import apps4christ.android.nhicapp.podcast.PodcastAdapter;
-import apps4christ.android.nhicapp.podcast.RssItem;
+import apps4christ.android.nhicapp.data.RssItem;
 import apps4christ.android.nhicapp.podcast.RssReader;
 import apps4christ.android.nhicapp.R;
 import com.google.android.gms.analytics.GoogleAnalytics;
@@ -43,12 +43,12 @@ public class PodcastFragment extends Fragment {
 	private Boolean isInternetPresent;
 	private ArrayAdapter<String> langSel;
 	private ActionBar bar;
-	private RSSTask task = null;
 	private Tracker dbgTracker;
     private View spinnerView;
 
-	public PodcastFragment() {
-	}
+	private List<RssItem> rssList;
+
+	public PodcastFragment() {}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,7 +57,7 @@ public class PodcastFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.podcast_main, container,
 				false);
 		podcastFragView = rootView;
-
+		inputSearch = (EditText) podcastFragView.findViewById(R.id.inputSearch);
         spinnerView = (View) podcastFragView
                 .findViewById(R.id.podcastloadingSpinner);
 
@@ -68,9 +68,20 @@ public class PodcastFragment extends Fragment {
 		isInternetPresent = cd.isConnectingToInternet(); // true or
 		// false
 
-		if (isInternetPresent) {
+		// Wait for data before enabling inputSearch
+		inputSearch.setEnabled(false);
+
+		if (savedInstanceState != null && savedInstanceState.containsKey("rssList")) {
+			List<Parcelable> parcelList = savedInstanceState.getParcelableArrayList("rssList");
+			rssList = new ArrayList();
+			for (Parcelable p: parcelList) {
+				rssList.add((RssItem) p);
+			}
+			renderFragment(rssList);
+			spinnerView.setVisibility(View.GONE);
+		} else if (isInternetPresent) {
             CreateLanguageDropDown();
-			EnableSearch();
+			setupSearchBar();
 		} else {
 			cd.showAlertDialog();
             spinnerView.setVisibility(View.GONE);
@@ -90,6 +101,14 @@ public class PodcastFragment extends Fragment {
 
 		dbgTracker.setScreenName("Podcasts");
 		dbgTracker.send(new HitBuilders.AppViewBuilder().build());
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		if (rssList != null) {
+			outState.putParcelableArrayList("rssList", new ArrayList<RssItem>(rssList));
+		}
+		super.onSaveInstanceState(outState);
 	}
 
 	/*
@@ -147,17 +166,20 @@ public class PodcastFragment extends Fragment {
     }
 
 	/*
-	 * Enable the search bar of the NHIC podcast fragment
+	 * Create the search bar of the NHIC podcast fragment
 	 * 
-	 * Enable the EditText inputSearch in podcastFragView.xml by hooking up an
-	 * addTextChangedListener property to it. The addTextChangedListener
+	 * Set up the functionality of the EditText inputSearch in podcastFragView.xml by
+	 * hooking up an addTextChangedListener property to it. The addTextChangedListener
 	 * executes the getFilter() routine of the podcastAdapter.
 	 */
-	public void EnableSearch() {
-		inputSearch = (EditText) podcastFragView.findViewById(R.id.inputSearch);
-
+	public void setupSearchBar() {
+		//TODO: Refactor inputSearch to remove the dead textChangedListeners
 		assert (inputSearch != null);
 
+		if (this.podcastAdapter != null) {
+			this.podcastAdapter.resetData();
+			this.podcastAdapter.getFilter().filter(inputSearch.getText());
+		}
 		inputSearch.addTextChangedListener(new TextWatcher() {
 
 			@Override
@@ -171,7 +193,14 @@ public class PodcastFragment extends Fragment {
 				}
 
 				// When user changed the Text
-				PodcastFragment.this.podcastAdapter.getFilter().filter(cs);
+				/*
+					Null check is necessary because this is called
+					when the inputSearch is created (before the
+				 	podcastAdapter is created)
+				*/
+				if (PodcastFragment.this.podcastAdapter != null) {
+					PodcastFragment.this.podcastAdapter.getFilter().filter(cs);
+				}
 
 			}
 
@@ -197,9 +226,7 @@ public class PodcastFragment extends Fragment {
 	 */
 	public void CreateRSSService(String url) {
 
-		task = new RSSTask();
-
-		task.m_activity = getActivity();
+		RSSTask task = new RSSTask(this);
 
 		// Execute the GetRssDataTask using the following url
 		task.execute(url);
@@ -208,24 +235,59 @@ public class PodcastFragment extends Fragment {
 		Log.d("PodcastRss", Thread.currentThread().getName());
 	}
 
+	private void renderFragment(List<RssItem> result) {
+		// Cache the rssList so that it can be reused
+		// to recreate the view
+		rssList = result;
+		View progressBar = podcastFragView
+				.findViewById(R.id.podcastloadingSpinner);
+		// Hide loading bar
+		progressBar.setVisibility(View.GONE);
+
+		// Get a ListView from main view
+		ListView nhicItems = (ListView) podcastFragView
+				.findViewById(R.id.listMainView);
+		assert (nhicItems != null);
+
+		// Create a list adapter if we have results
+		// If results is null, it is likely because the HTTP
+		// call failed (no network)
+		if (result != null) {
+			podcastAdapter = new PodcastAdapter(getActivity(),
+					R.layout.podcast_item_row, result);
+
+			// Set list adapter for the ListView
+			nhicItems.setAdapter(podcastAdapter);
+			// Allow the nhicItems listView to be text filtered
+			nhicItems.setTextFilterEnabled(true);
+
+			// Set list view item click listener
+			nhicItems.setOnItemClickListener(new ListListener(result,
+					getActivity()));
+			if (inputSearch != null) {
+				setupSearchBar();
+				inputSearch.setEnabled(true);
+			}
+		} else {
+			new AlertDialog.Builder(this.getActivity())
+					.setTitle(R.string.noInternetConnectionTitle)
+					.setMessage(R.string.pleaseConnectToInternetMessage)
+					.show();
+		}
+	}
+
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-
-        if(task != null)
-		    task.m_activity = null;
 	}
 
 	static class RSSTask extends AsyncTask<String, Void, List<RssItem>> {
-
-		Activity m_activity = null;
 		private View progressBar;
+		PodcastFragment parent;
 
-		@Override
-		protected void onPreExecute() {
-			// Set References to loading bar
-			progressBar = (View) podcastFragView
-					.findViewById(R.id.podcastloadingSpinner);
+		public RSSTask(PodcastFragment parent) {
+			super();
+			this.parent = parent;
 		}
 
 		@Override
@@ -252,31 +314,7 @@ public class PodcastFragment extends Fragment {
 
 		@Override
 		protected void onPostExecute(List<RssItem> result) {
-
-			if (m_activity != null) {
-				// Hide loading bar
-				progressBar.setVisibility(View.GONE);
-
-				// Get a ListView from main view
-				ListView nhicItems = (ListView) podcastFragView
-						.findViewById(R.id.listMainView);
-				assert (nhicItems != null);
-
-				// Create a list adapter
-				podcastAdapter = new PodcastAdapter(m_activity,
-						R.layout.podcast_item_row, result);
-
-				// Set list adapter for the ListView
-				nhicItems.setAdapter(podcastAdapter);
-				// Allow the nhicItems listView to be text filtered
-				nhicItems.setTextFilterEnabled(true);
-
-				// Set list view item click listener
-				nhicItems.setOnItemClickListener(new ListListener(result,
-						m_activity));
-
-			}
-
+			parent.renderFragment(result);
 		}
 	}
 

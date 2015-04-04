@@ -1,10 +1,13 @@
-package apps4christ.android.nhicapp.podcast;
+package apps4christ.android.nhicapp.data;
 
 /* This class stores the contents extracted from the NHIC Rss Feed. */
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 
-public class RssItem {
+public class RssItem implements Parcelable {
 	private String title;
 	private String enclosure; /* link, url */
 	private Date pubDate;
@@ -53,4 +56,38 @@ public class RssItem {
 	public String toString() {
 		return title;
 	}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(title);
+		dest.writeString(enclosure);
+		dest.writeLong(pubDate.getTime());
+		dest.writeString(author);
+		dest.writeString(duration);
+		dest.writeString(content);
+	}
+
+	public static final Parcelable.Creator<RssItem> CREATOR
+			= new Parcelable.Creator<RssItem>() {
+		public RssItem createFromParcel(Parcel in) {
+			RssItem item = new RssItem();
+			item.enclosure = in.readString();
+			item.title = in.readString();
+			item.pubDate = new Date(in.readLong());
+			item.author = in.readString();
+			item.duration = in.readString();
+			item.content = in.readString();
+			return item;
+		}
+
+		public RssItem[] newArray(int size) {
+			return new RssItem[size];
+		}
+	};
+
 }

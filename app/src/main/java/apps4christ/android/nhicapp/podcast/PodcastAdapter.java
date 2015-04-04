@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Locale;
 
 import apps4christ.android.nhicapp.R;
+import apps4christ.android.nhicapp.data.RssItem;
 
 import android.content.Context;
 import android.util.Log;
@@ -21,11 +22,9 @@ import android.widget.Filter;
 public class PodcastAdapter extends ArrayAdapter<RssItem> {
 
 	private LayoutInflater inflater;
-	private List<RssItem> datas; // original list
-	public List<RssItem> filteredData;
-	private List<RssItem> copyDatas; // copied list used to rebuild after
-										// canceling search
-	public ArrayList<RssItem> filteredItems;
+	private List<RssItem> rssItems;
+	private List<RssItem> filteredData;
+
 	private PodcastFilter filter;
 
 	static class ViewHolder {
@@ -37,17 +36,16 @@ public class PodcastAdapter extends ArrayAdapter<RssItem> {
 
 	// Constructor for Podcast Adapter
 	public PodcastAdapter(Context context, int textViewResourceId,
-			List<RssItem> objects) {
-		super(context, textViewResourceId, objects);
+			List<RssItem> rssItems) {
+		// The super constructor mutates rssItems
+		super(context, textViewResourceId, new ArrayList<RssItem>(rssItems));
 		// TODO Auto-generated constructor stub
 		inflater = ((Activity) context).getLayoutInflater();
-		datas = objects;
 
-		this.filteredData = new ArrayList<RssItem>();
-		this.filteredData.addAll(datas);
+		this.rssItems = new ArrayList<RssItem>(rssItems);
 
-		this.copyDatas = new ArrayList<RssItem>();
-		this.copyDatas.addAll(datas);
+		this.filteredData = new ArrayList<RssItem>(rssItems);
+
 	}
 
 	@Override
@@ -59,7 +57,10 @@ public class PodcastAdapter extends ArrayAdapter<RssItem> {
 	}
 
 	public void resetData(){
-		filteredData = datas;
+		filteredData = new ArrayList<>();
+		if (rssItems != null) {
+			filteredData.addAll(rssItems);
+		}
 	}
 
 	public View getView(int position, View convertView, ViewGroup parent) {
@@ -103,6 +104,20 @@ public class PodcastAdapter extends ArrayAdapter<RssItem> {
 		return convertView;
 	}
 
+	/*
+		This filter class:
+
+		1. Filters the data received from the rssItems field from the
+		PodcastAdapter asynchronously (i.e. separate thread)
+
+		2. *mutates* the filteredData attribute from PodcastAdapter
+		to pass information back to PodcastAdapter for rendering
+		purposes
+
+		Other properties:
+		Does NOT mutate rssItems
+		Mutates filteredData
+	 */
 	private class PodcastFilter extends Filter {
 
 		@Override
@@ -113,23 +128,25 @@ public class PodcastAdapter extends ArrayAdapter<RssItem> {
 			assert(result != null);
 
 			if (constraint != null && constraint.toString().length() > 0) {
-				filteredItems = new ArrayList<RssItem>();
+				List<RssItem> filteredItems = new ArrayList<RssItem>();
 
-				for (int i = 0, l = copyDatas.size(); i < l; i++) {
-					RssItem rssItem = copyDatas.get(i);
-
-					// Check a match against the podcast title or speaker
-					if (foundMatch(rssItem, constraint))
-						filteredItems.add(rssItem);
+				synchronized (this) {
+					for (RssItem rssItem : rssItems) {
+						if (foundMatch(rssItem, constraint)) {
+							filteredItems.add(rssItem);
+						}
+					}
+					result.count = filteredItems.size();
+					result.values = filteredItems;
 				}
-				result.count = filteredItems.size();
-				result.values = filteredItems;
+
+
 			} else {
 				synchronized (this) {
 					//Rebuild the list when search is cancelled.
 					Log.d("PodcastAdapter", "search cancelled, rebuilding");
-					result.values = copyDatas;
-					result.count = copyDatas.size();
+					result.values = new ArrayList<RssItem>(rssItems);
+					result.count = rssItems.size();
 				}
 			}
 			return result;
@@ -164,14 +181,11 @@ public class PodcastAdapter extends ArrayAdapter<RssItem> {
 		@Override
 		protected void publishResults(CharSequence constraint,
 				FilterResults results) {
-
 			filteredData = (List<RssItem>) results.values;
-			notifyDataSetChanged();
 			clear();
+			addAll(filteredData);
 
-			for (int i = 0, l = filteredData.size(); i < l; i++)
-				add(filteredData.get(i));
-			notifyDataSetInvalidated();
+			notifyDataSetChanged();
 		}
 	}
 

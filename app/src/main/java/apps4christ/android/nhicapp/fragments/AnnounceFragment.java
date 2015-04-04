@@ -3,8 +3,6 @@ package apps4christ.android.nhicapp.fragments;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,16 +16,17 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import apps4christ.android.nhicapp.announcements.AnnounceAdapter;
 import apps4christ.android.nhicapp.main.ConnectionDetector;
 import apps4christ.android.nhicapp.podcast.ListListener;
-import apps4christ.android.nhicapp.podcast.RssItem;
+import apps4christ.android.nhicapp.data.RssItem;
 import apps4christ.android.nhicapp.R;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
-import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,11 +38,13 @@ public class AnnounceFragment extends Fragment {
 	private static AnnounceAdapter announceAdapter;
 	private static String urlStr = "http://www.newhic.org/feed/";
 	private static View announceFragView;
-	private static ArrayList<RssItem> rssList;
 	private static RssItem currentItem;
 	private RSSTask task = null;
 	private Tracker dbgTracker;
     private View spinnerView;
+
+	// State that should be saved using Parcelable
+	private List<RssItem> rssList;
 
 	public AnnounceFragment() {
 	}
@@ -60,7 +61,6 @@ public class AnnounceFragment extends Fragment {
         spinnerView = (View) announceFragView
                 .findViewById(R.id.announceloadingSpinner);
 
-		rssList = new ArrayList<RssItem>();
 		/* Check for internet connectivity to avoid exceptions */
 		ConnectionDetector cd = new ConnectionDetector(
 				announceFragView.getContext());
@@ -71,9 +71,17 @@ public class AnnounceFragment extends Fragment {
 		 * Since Podcasts rely on internet connectivity, we only search for
 		 * Podcasts when it is detected
 		 */
-		if (isInternetPresent)
+		if (savedInstanceState != null && savedInstanceState.containsKey("rssList")) {
+			List<Parcelable> parcelList = savedInstanceState.getParcelableArrayList("rssList");
+			ArrayList<RssItem> rssList = new ArrayList();
+			for (Parcelable p: parcelList) {
+				rssList.add((RssItem) p);
+			}
+			renderFragment(rssList);
+			spinnerView.setVisibility(View.GONE);
+		} else if (isInternetPresent) {
 			CreateRSSService();
-		else {
+		} else {
             cd.showAlertDialog();
             spinnerView.setVisibility(View.GONE);
         }
@@ -94,11 +102,18 @@ public class AnnounceFragment extends Fragment {
 		dbgTracker.send(new HitBuilders.AppViewBuilder().build());
 	}
 
-	public void CreateRSSService() {
-		task = new RSSTask();
-		assert (task != null);
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		if (rssList != null) {
+			ArrayList<RssItem> parcelableRssItems = new ArrayList(rssList);
+			outState.putParcelableArrayList("rssList", parcelableRssItems);
+		}
+		super.onSaveInstanceState(outState);
+	}
 
-		task.m_activity = getActivity();
+	public void CreateRSSService() {
+		task = new RSSTask(this);
+		assert (task != null);
 
 		try {
 			// Start download RSS task
@@ -119,6 +134,38 @@ public class AnnounceFragment extends Fragment {
 		}
 	}
 
+	public void renderFragment(List<RssItem> result) {
+		rssList = result;
+		// Set reference to loading bar
+		View progressBar = (View) announceFragView
+				.findViewById(R.id.announceloadingSpinner);
+		// Hide the loading bar
+		progressBar.setVisibility(View.GONE);
+
+		if (rssList != null) {
+			// Get a ListView from main view
+			ListView nhicItems = (ListView) announceFragView
+					.findViewById(R.id.announceListMainView);
+			assert (nhicItems != null);
+			// Create a list adapter
+			announceAdapter = new AnnounceAdapter(getActivity(),
+					R.layout.announcement_item_row, result);
+
+			// Set list adapter for the ListView
+			nhicItems.setAdapter(announceAdapter);
+			// nhicItems.setTextFilterEnabled(true);
+
+			// Set list view item click listener
+			nhicItems.setOnItemClickListener(new ListListener(result,
+					getActivity()));
+		} else {
+			new AlertDialog.Builder(this.getActivity())
+					.setTitle(R.string.noInternetConnectionTitle)
+					.setMessage(R.string.pleaseConnectToInternetMessage)
+					.show();
+		}
+	}
+
 	/*
 	 * This routine is the way Android recommends us to parse RSS but at this
 	 * point March 9, 2014 it seems to run very slow even for a short list. The
@@ -128,12 +175,13 @@ public class AnnounceFragment extends Fragment {
 	 * TODO: Push this into a queue that is consumed by the view
 	 *
 	 */
-	public static void XMLPullParserRoutine() {
+	public static List<RssItem> XMLPullParserRoutine() {
 
 		boolean insideItem = false;
 		// Used to reference item while parsing
 
 		try {
+			ArrayList<RssItem> rssList = new ArrayList<>();
 			URL url = new URL(urlStr);
 
 			XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
@@ -141,111 +189,88 @@ public class AnnounceFragment extends Fragment {
 			XmlPullParser xpp = factory.newPullParser();
 
 			// We will get the XML from an input stream
-			xpp.setInput(getInputStream(url), "UTF_8");
+			InputStream response = getInputStream(url);
+			if (response != null) {
+				xpp.setInput(getInputStream(url), "UTF_8");
 
-			// Returns the type of current event: START_TAG, END_TAG, etc..
-			int eventType = xpp.getEventType();
-			while (eventType != XmlPullParser.END_DOCUMENT) {
-				if (eventType == XmlPullParser.START_TAG) {
+				// Returns the type of current event: START_TAG, END_TAG, etc..
+				int eventType = xpp.getEventType();
+				while (eventType != XmlPullParser.END_DOCUMENT) {
+					if (eventType == XmlPullParser.START_TAG) {
 
-					if (xpp.getName().equalsIgnoreCase("item")) {
-						currentItem = new RssItem();
-						rssList.add(currentItem);
-						insideItem = true;
+						if (xpp.getName().equalsIgnoreCase("item")) {
+							currentItem = new RssItem();
+							rssList.add(currentItem);
+							insideItem = true;
 
-					} else if (xpp.getName().equalsIgnoreCase("title")) {
-						if (insideItem)
-							currentItem.setTitle(xpp.nextText());
-					} else if (xpp.getName().equalsIgnoreCase("description")) {
-						if (insideItem)
-							currentItem.setContent(xpp.nextText());
-					} else if (xpp.getName().equalsIgnoreCase("pubDate")) {
-						if (insideItem) {
-							Date pubDate = null;
-							String nextText = xpp.nextText();
-							try {
-								pubDate = DateUtils.parseDate(nextText);
-							} catch (DateParseException e) {
-								Log.e("AnnounceFragment", "Error in parsing date!");
+						} else if (xpp.getName().equalsIgnoreCase("title")) {
+							if (insideItem)
+								currentItem.setTitle(xpp.nextText());
+						} else if (xpp.getName().equalsIgnoreCase("description")) {
+							if (insideItem)
+								currentItem.setContent(xpp.nextText());
+						} else if (xpp.getName().equalsIgnoreCase("pubDate")) {
+							if (insideItem) {
+								Date pubDate = null;
+								String nextText = xpp.nextText();
+								try {
+									pubDate = DateUtils.parseDate(nextText);
+								} catch (DateParseException e) {
+									Log.e("AnnounceFragment", "Error in parsing date!");
+								}
+								currentItem.setPubDate(pubDate);
 							}
-							Log.d("AnnounceFragment", nextText);
-							currentItem.setPubDate(pubDate);
+
+						} else if (xpp.getName().equalsIgnoreCase("link")) {
+							if (insideItem)
+								currentItem.setEnclosure(xpp.nextText());
 						}
-
-					} else if (xpp.getName().equalsIgnoreCase("link")) {
-						if (insideItem)
-							currentItem.setEnclosure(xpp.nextText());
+					} else if (eventType == XmlPullParser.END_TAG
+							&& xpp.getName().equalsIgnoreCase("item")) {
+						insideItem = false;
 					}
-				} else if (eventType == XmlPullParser.END_TAG
-						&& xpp.getName().equalsIgnoreCase("item")) {
-					insideItem = false;
+					eventType = xpp.next(); // move to next element
 				}
-
-				eventType = xpp.next(); // move to next element
+				return rssList;
+			} else {
+				return null;
 			}
-
 		} catch (IOException e) {
 			e.printStackTrace();
+			return null;
 		} catch (XmlPullParserException e) {
 			e.printStackTrace();
+			return null;
 		}
 	}
 
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-
-        if(task != null)
-		    task.m_activity = null;
+		if(task != null) {
+			if (!task.isCancelled()) {
+				task.cancel(true);
+			}
+			task.parent = null;
+		}
 	}
 
 	static class RSSTask extends AsyncTask<String, Void, List<RssItem>> {
+		AnnounceFragment parent;
 
-		Activity m_activity = null;
-		private View progressBar;
-
-		@Override
-		protected void onPreExecute() {
-			// Set reference to loading bar
-			progressBar = (View) announceFragView
-					.findViewById(R.id.announceloadingSpinner);
+		public RSSTask(AnnounceFragment parent) {
+			super();
+			this.parent = parent;
 		}
 
 		@Override
 		protected List<RssItem> doInBackground(String... urls) {
-
-			XMLPullParserRoutine();
-
-			return null;
+			return XMLPullParserRoutine();
 		}
 
 		@Override
 		protected void onPostExecute(List<RssItem> result) {
-			// Get a ListView from main view
-
-			if (m_activity != null) {
-				// Hide the loading bar
-				progressBar.setVisibility(View.GONE);
-
-				result = rssList;
-
-				ListView nhicItems = (ListView) announceFragView
-						.findViewById(R.id.announceListMainView);
-				assert (nhicItems != null);
-
-				// Create a list adapter
-				announceAdapter = new AnnounceAdapter(m_activity,
-						R.layout.announcement_item_row, result);
-
-				// Set list adapter for the ListView
-				nhicItems.setAdapter(announceAdapter);
-				// nhicItems.setTextFilterEnabled(true);
-
-				// Set list view item click listener
-				nhicItems.setOnItemClickListener(new ListListener(result,
-						m_activity));
-			}
-
+			parent.renderFragment(result);
 		}
 	}
 }

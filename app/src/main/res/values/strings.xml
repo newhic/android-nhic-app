@@ -13,7 +13,6 @@
     <string name="desc_list_item_icon">Item Icon</string>
     <string name="defaultText">This page is currently under construction</string>
 
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
@@ -21,6 +20,10 @@
 
     <string name="searchHint">Search for podcast</string>
     <string name="homeMsg">We are an international, protestant, evangelical, charismatic, non-denominational church.  Our senior pastors are Ps. Varun and Da Laohaprasit, who are devoting their time and lives to reaching out to local communities and internationally.</string>
+
+    <!-- No internet connection messages -->
+    <string name="noInternetConnectionTitle">No Internet Connection</string>
+    <string name="pleaseConnectToInternetMessage">Please connect to the internet to see content</string>
 
     <!-- Nav Drawer Menu Items -->
     <string-array name="nav_drawer_items">

@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import apps4christ.android.nhicapp.podcast.RssItem;
+import apps4christ.android.nhicapp.data.RssItem;
 import apps4christ.android.nhicapp.R;
 
 public class AnnounceAdapter extends ArrayAdapter<RssItem> {
