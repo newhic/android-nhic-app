@@ -86,17 +86,20 @@ public class VideosFragment extends Fragment {
         mWebChromeClient.onHideCustomView();
     }
 
+
     @Override
     public void onPause() {
         super.onPause();    //To change body of overridden methods use File | Settings | File Templates.
-        webView.onPause();
+        if(webView != null)
+            webView.onPause();
     }
 
 	@Override
 	public void onResume() {
 		super.onResume();
 
-        webView.onResume();
+        if(webView != null)
+            webView.onResume();
 
 		dbgTracker.setScreenName("Videos");
 		dbgTracker.send(new HitBuilders.AppViewBuilder().build());
