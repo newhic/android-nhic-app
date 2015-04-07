@@ -119,5 +119,6 @@
         <item>Eric Wang</item>
         <item>Annie Wong</item>
     </string-array>
+    <string name="dateFormat">yyyy-MM-dd</string>
 
 </resources>
