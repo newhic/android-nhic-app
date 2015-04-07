@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">NHIC</string>
+    <string name ="trackingId">UA-51856239-1</string>
+
+    <string name="defaultSermon">God Is Good</string>
+    <string name="defaultPastor">Ps. Varun Laohaprasit MD</string>
+    <string name="defaultDate">March 14, 2014</string>
+    <string name="defaultDuration">48:55</string>
+    <string name="defaultAnnouncement">NHIC News!</string>
+    <string name="defaultAnnouncementDesc">There is church on Sunday!</string>
+    <string name="desc_list_item_icon">Item Icon</string>
+    <string name="defaultText">This page is currently under construction</string>
+
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="searchHint">搜寻 播客</string>
+    <string name="homeMsg">We are an international, protestant, evangelical, charismatic, non-denominational church.  Our senior pastors are Ps. Varun and Da Laohaprasit, who are devoting their time and lives to reaching out to local communities and internationally.</string>
+
+    <!-- RSS podcast XML URLs sorted by language -->
+    <string name="englishPodcastURL">http://www.newhic.org/Media/Audio/rss.xml</string>
+    <string name="thaiPodcastURL">http://www.newhic.org/Media/Thai/rss.xml</string>
+    <string name="mandarinPodcastURL">http://www.newhic.org/Media/Mandarin/rss.xml</string>
+    <string name="japanesePodcastURL">http://www.newhic.org/Media/Japanese/rss.xml</string>
+    <string name="germanPodcastURL">http://www.newhic.org/Media/German/rss.xml</string>
+
+    <!-- HomePage URLs -->
+    <string name="visionURL">http://www.newhic.org/about/our-vision/</string>
+    <string name="statementURL">http://www.newhic.org/about/statement-of-faith/</string>
+    <string name="valuesURL">http://www.newhic.org/about/core-values/</string>
+
+    <!-- URLs -->
+    <string name="visionUrl"><a href="http://www.newhic.org/about/our-vision">Our Vision</a></string>
+    <string name="statementOfFaithUrl"><a href="http://www.newhic.org/about/statement-of-faith">Statement of Faith</a></string>
+    <string name="coreValuesUrl"><a href="http://www.newhic.org/about/core-values">Core Values</a></string>
+
+
+    <!-- Podcast Language Selector Items -->
+    <string-array name="podcast_lang_select">
+        <item>English</item>
+        <item>ไทย</item>
+        <item>中文</item>
+        <item>日本の</item>
+        <item>Deutsch</item>
+    </string-array>
+
+    <!-- RSS announcement XML URLs -->
+    <string name="announceURL">http://www.newhic.org/feed/</string>
+
+    <!-- Nav Drawer Menu Items -->
+    <string-array name="nav_drawer_items">
+        <item>主页</item>
+        <item>公告</item>
+        <item>播客</item>
+        <item>视频</item>
+        <item>设置</item>
+    </string-array>
+
+    <!-- Home page vision, statement, values -->
+    <string-array name="home_page_values">
+        <item>我们的愿景</item>
+        <item>我们的信念</item>
+        <item>核心价值观</item>
+    </string-array>
+
+    <!-- Preference Fragment strings -->
+    <string name="prefLangCatTitle">语言</string> //Languages
+    <string name="prefOthCatTitle">其他</string>  //Other
+    <string name="prefPolCatTitle">隐私条款</string> //Privacy Policy
+
+    <string name="prefLangTitle">播客语种์</string> //Podcast Language
+    <string name="prefLangSumm">选择播客语种</string>
+
+    <string name="prefAbtTitle">关于</string>
+    <string name="prefAbtSumm">关于开发者与app</string>
+
+    <string name="prefAckTitle">铭谢</string> //Acknowledgements
+    <string name="prefAckSumm">致谢支持开发此app的所有人</string>
+
+    <string name="prefPolTitle">版权</string> //Policy
+
+
+    <string name="aboutDev">Apps4Christ is a development team aimed at creating apps for church communities. As software engineers by trade, they hope to use their skills for the glory of God\'s kingdom! </string>
+    <string name="aboutApp">The NHIC App was birthed when the Ohana caregroups started their weekly sermon listening. While it was much easier for iTunes users to get the podcasts, the rest of us had to rely on dropbox. Uploading and downloading the sermons proved to be a complicated process and a new way of doing things was needed. The NHIC App started off as a simple podcast application but slowly morphed into a fully featured app. As it is an ongoing project, please feel free to report bugs by emailing nhicdev@gmail.com. Please include your phone model in the report.</string>
+
+
+    <string name="prefVersion">NHIC app 版本</string>
+
+    <string name="testerAck">特别铭谢以下同意本人在其手机上进行测试。谢谢所有最初的故障报告，贡献和鼓励</string>
+    <string name ="nhicAck">谢谢各位NHIC同工的鼓励和支持帮助我实现这个项目.</string>
+
+    <string name="EULA">Copyright 2014 New Hope International Church. All rights reserved. This software may not be copied, reproduced, transmitted, reduced to any electronic medium or machine readable format without prior consent in writing from New Hope International Church or AppsForChrist. Users may not modify, translate, or decompile into its constituent source code. DISCLAIMER: User acknowledges that the software may not be free from defects and may not satisfy all user needs. In no event will New Hope International Church or AppsForChrist be held liable for direct, indirect, incidental or consequential damages. These damages cover defects on the device, or financial loss.   </string>
+
+    <string name ="nhicAckPpl">Samantha Aw, Tara Bastatas, Martha Bailon, Kyla Hoggard, Kevin Hsu, Steven Hsu, Eric Hu, Spencer Huang, Joy Macaluso, Pat Macaluso, Sherry Ren, Dawn Roman, Joanne Shea, Rachel Tien, Aaron Tokita, Kenny Tsai, Eric Wang, Annie Wong. </string>
+
+    <!-- Acknowledgements Items -->
+    <string-array name="ack_items">
+        <item>Samantha Aw</item>
+        <item>Tara Bastatas</item>
+        <item>Martha Bailon</item>
+        <item>Kyla Hoggard</item>
+        <item>Kevin Hsu</item>
+        <item>Steven Hsu</item>
+        <item>Eric Hu</item>
+        <item>Spencer Huang</item>
+        <item>Joy Macaluso</item>
+        <item>Pat Macaluso</item>
+        <item>Sherry Ren</item>
+        <item>Dawn Roman</item>
+        <item>Joanne Shea</item>
+        <item>Rachel Tien</item>
+        <item>Aaron Tokita</item>
+        <item>Kenny Tsai</item>
+        <item>Eric Wang</item>
+        <item>Annie Wong</item>
+    </string-array>
+
+</resources>
