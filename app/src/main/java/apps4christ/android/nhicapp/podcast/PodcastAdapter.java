@@ -19,11 +19,18 @@ import android.widget.TextView;
 import android.app.Activity;
 import android.widget.Filter;
 
+/**
+ * PodcastAdapter transforms the RssItem objects into View objects to be
+ * rendered.
+ *
+ * It does this by storing an array of RssItems (This is handled by
+ * superclass ArrayAdapter). This store from ArrayAdapter is then modified
+ * by PodcastFilter to publish results.
+ */
 public class PodcastAdapter extends ArrayAdapter<RssItem> {
 
 	private LayoutInflater inflater;
-	private List<RssItem> rssItems;
-	private List<RssItem> filteredData;
+	private List<RssItem> originalRssItems;
 
 	private PodcastFilter filter;
 
@@ -37,29 +44,24 @@ public class PodcastAdapter extends ArrayAdapter<RssItem> {
 	// Constructor for Podcast Adapter
 	public PodcastAdapter(Context context, int textViewResourceId,
 			List<RssItem> rssItems) {
-		// The super constructor mutates rssItems
-		super(context, textViewResourceId, new ArrayList<RssItem>(rssItems));
-		// TODO Auto-generated constructor stub
+		// The super constructor mutates originalRssItems
+		super(context, textViewResourceId, new ArrayList<>(rssItems));
 		inflater = ((Activity) context).getLayoutInflater();
-
-		this.rssItems = new ArrayList<RssItem>(rssItems);
-
-		this.filteredData = new ArrayList<RssItem>(rssItems);
-
+		this.originalRssItems = new ArrayList<>(rssItems);
 	}
 
 	@Override
 	public Filter getFilter() {
-		if (filter == null)
-			filter = new PodcastFilter();
+		if (this.filter == null)
+			this.filter = new PodcastFilter();
 
-		return filter;
+		return this.filter;
 	}
 
 	public void resetData(){
-		filteredData = new ArrayList<>();
-		if (rssItems != null) {
-			filteredData.addAll(rssItems);
+		this.clear();
+		if (originalRssItems != null) {
+			this.addAll(originalRssItems);
 		}
 	}
 
@@ -70,7 +72,6 @@ public class PodcastAdapter extends ArrayAdapter<RssItem> {
 			convertView = inflater.inflate(R.layout.podcast_item_row, null);
 
 			viewHolder = new ViewHolder();
-			assert(viewHolder != null);
 
 			Log.d("PodcastAdapter", "Setting the variables");
 			viewHolder.titleView = (TextView) convertView
@@ -86,9 +87,9 @@ public class PodcastAdapter extends ArrayAdapter<RssItem> {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 
-		viewHolder.titleView.setText(filteredData.get(position).getTitle());
+		viewHolder.titleView.setText(this.getItem(position).getTitle());
 
-		Date pubDate = filteredData.get(position).getPubDate();
+		Date pubDate = this.getItem(position).getPubDate();
 		String pubDateString;
 		if (pubDate != null) {
 			pubDateString = DateFormat.getDateInstance().format(pubDate);
@@ -98,8 +99,8 @@ public class PodcastAdapter extends ArrayAdapter<RssItem> {
 		}
 		viewHolder.dateView.setText(pubDateString);
 
-		viewHolder.pastorView.setText(filteredData.get(position).getAuthor());
-		viewHolder.durationView.setText(filteredData.get(position).getDuration());
+		viewHolder.pastorView.setText(this.getItem(position).getAuthor());
+		viewHolder.durationView.setText(this.getItem(position).getDuration());
 
 		return convertView;
 	}
@@ -107,7 +108,7 @@ public class PodcastAdapter extends ArrayAdapter<RssItem> {
 	/*
 		This filter class:
 
-		1. Filters the data received from the rssItems field from the
+		1. Filters the data received from the originalRssItems field from the
 		PodcastAdapter asynchronously (i.e. separate thread)
 
 		2. *mutates* the filteredData attribute from PodcastAdapter
@@ -115,7 +116,7 @@ public class PodcastAdapter extends ArrayAdapter<RssItem> {
 		purposes
 
 		Other properties:
-		Does NOT mutate rssItems
+		Does NOT mutate originalRssItems
 		Mutates filteredData
 	 */
 	private class PodcastFilter extends Filter {
@@ -125,13 +126,12 @@ public class PodcastAdapter extends ArrayAdapter<RssItem> {
 
 			constraint = constraint.toString().toLowerCase(Locale.ENGLISH);
 			FilterResults result = new FilterResults();
-			assert(result != null);
 
-			if (constraint != null && constraint.toString().length() > 0) {
-				List<RssItem> filteredItems = new ArrayList<RssItem>();
+			if (constraint.toString().length() > 0) {
+				List<RssItem> filteredItems = new ArrayList<>();
 
 				synchronized (this) {
-					for (RssItem rssItem : rssItems) {
+					for (RssItem rssItem : originalRssItems) {
 						if (foundMatch(rssItem, constraint)) {
 							filteredItems.add(rssItem);
 						}
@@ -145,8 +145,8 @@ public class PodcastAdapter extends ArrayAdapter<RssItem> {
 				synchronized (this) {
 					//Rebuild the list when search is cancelled.
 					Log.d("PodcastAdapter", "search cancelled, rebuilding");
-					result.values = new ArrayList<RssItem>(rssItems);
-					result.count = rssItems.size();
+					result.values = new ArrayList<>(originalRssItems);
+					result.count = originalRssItems.size();
 				}
 			}
 			return result;
@@ -155,12 +155,8 @@ public class PodcastAdapter extends ArrayAdapter<RssItem> {
 		public boolean foundMatch(RssItem rssItem, CharSequence constraint) {
 			String title;
 			String author;
-			Date pubDate;
-			String pubDateString;
 
 			title = rssItem.getTitle().toLowerCase(Locale.ENGLISH);
-			pubDate = rssItem.getPubDate();
-			pubDateString = DateFormat.getDateInstance().format(pubDate);
 
 			if (title.contains(constraint))
 				return true;
@@ -171,9 +167,9 @@ public class PodcastAdapter extends ArrayAdapter<RssItem> {
 				author = author.toLowerCase(Locale.ENGLISH);
 				if (author.contains(constraint))
 					return true;
-			} else
-				Log.d("foundMatch", "author is " + author);
-
+			} else {
+				Log.d("foundMatch", "author is null");
+			}
 			return false;
 		}
 
@@ -181,10 +177,8 @@ public class PodcastAdapter extends ArrayAdapter<RssItem> {
 		@Override
 		protected void publishResults(CharSequence constraint,
 				FilterResults results) {
-			filteredData = (List<RssItem>) results.values;
 			clear();
-			addAll(filteredData);
-
+			addAll((List<RssItem>) results.values);
 			notifyDataSetChanged();
 		}
 	}

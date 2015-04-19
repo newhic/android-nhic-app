@@ -254,7 +254,7 @@ public class PodcastFragment extends Fragment {
 		// call failed (no network)
 		if (result != null) {
 			podcastAdapter = new PodcastAdapter(getActivity(),
-					R.layout.podcast_item_row, result);
+					R.layout.podcast_item_row, new ArrayList<>(result));
 
 			// Set list adapter for the ListView
 			nhicItems.setAdapter(podcastAdapter);
