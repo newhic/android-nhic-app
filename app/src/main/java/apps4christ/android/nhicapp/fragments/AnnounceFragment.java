@@ -3,8 +3,6 @@ package apps4christ.android.nhicapp.fragments;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -168,7 +166,6 @@ public class AnnounceFragment extends Fragment {
 							} catch (DateParseException e) {
 								Log.e("AnnounceFragment", "Error in parsing date!");
 							}
-							Log.d("AnnounceFragment", nextText);
 							currentItem.setPubDate(pubDate);
 						}
 

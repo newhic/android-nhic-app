@@ -39,6 +39,8 @@
     <string name="statementOfFaithUrl"><a href="http://www.newhic.org/about/statement-of-faith">Statement of Faith</a></string>
     <string name="coreValuesUrl"><a href="http://www.newhic.org/about/core-values">Core Values</a></string>
 
+    <!-- Date Format String -->
+    <string name="dateFormat">dd/MM/yyyy</string>
 
     <!-- Podcast Language Selector Items -->
     <string-array name="podcast_lang_select">

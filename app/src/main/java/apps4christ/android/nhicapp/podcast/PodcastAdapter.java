@@ -1,6 +1,6 @@
 package apps4christ.android.nhicapp.podcast;
 
-import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,6 +27,7 @@ public class PodcastAdapter extends ArrayAdapter<RssItem> {
 										// canceling search
 	public ArrayList<RssItem> filteredItems;
 	private PodcastFilter filter;
+	private Context context;
 
 	static class ViewHolder {
 		TextView titleView;
@@ -48,6 +49,7 @@ public class PodcastAdapter extends ArrayAdapter<RssItem> {
 
 		this.copyDatas = new ArrayList<RssItem>();
 		this.copyDatas.addAll(datas);
+		this.context = context;
 	}
 
 	@Override
@@ -90,7 +92,8 @@ public class PodcastAdapter extends ArrayAdapter<RssItem> {
 		Date pubDate = filteredData.get(position).getPubDate();
 		String pubDateString;
 		if (pubDate != null) {
-			pubDateString = DateFormat.getDateInstance().format(pubDate);
+			SimpleDateFormat df = new SimpleDateFormat(context.getString(R.string.dateFormat));
+			pubDateString = df.format(pubDate);
 		} else {
 			pubDateString = "";
 			Log.e("PodcastAdapter", "Unable to find pubDate from rss data!");
@@ -138,12 +141,8 @@ public class PodcastAdapter extends ArrayAdapter<RssItem> {
 		public boolean foundMatch(RssItem rssItem, CharSequence constraint) {
 			String title;
 			String author;
-			Date pubDate;
-			String pubDateString;
 
 			title = rssItem.getTitle().toLowerCase(Locale.ENGLISH);
-			pubDate = rssItem.getPubDate();
-			pubDateString = DateFormat.getDateInstance().format(pubDate);
 
 			if (title.contains(constraint))
 				return true;
