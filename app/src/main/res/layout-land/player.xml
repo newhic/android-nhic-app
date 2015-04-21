@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@color/church_bg_color"
+            android:textColor="@color/podcast_title"
             android:textSize="16dp"
             android:paddingLeft="10dp"
             android:textStyle="bold"
@@ -105,7 +105,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="start"
-                    android:textColor="#5d9aad"
+                    android:textColor="@color/podcast_time"
                     android:textStyle="bold"/>
                 <!-- Total Duration Label -->
                 <TextView
@@ -114,7 +114,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:textColor="@color/church_bg_color"
+                    android:textColor="@color/podcast_time"
                     android:textStyle="bold"/>
             </LinearLayout>
 

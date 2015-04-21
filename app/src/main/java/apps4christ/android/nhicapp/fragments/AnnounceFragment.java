@@ -220,7 +220,6 @@ public class AnnounceFragment extends Fragment {
 								}
 								currentItem.setPubDate(pubDate);
 							}
-
 						} else if (xpp.getName().equalsIgnoreCase("link")) {
 							if (insideItem)
 								currentItem.setEnclosure(xpp.nextText());

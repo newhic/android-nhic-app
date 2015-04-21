@@ -1,6 +1,6 @@
 package apps4christ.android.nhicapp.podcast;
 
-import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,6 +33,7 @@ public class PodcastAdapter extends ArrayAdapter<RssItem> {
 	private List<RssItem> originalRssItems;
 
 	private PodcastFilter filter;
+	private Context context;
 
 	static class ViewHolder {
 		TextView titleView;
@@ -92,7 +93,8 @@ public class PodcastAdapter extends ArrayAdapter<RssItem> {
 		Date pubDate = this.getItem(position).getPubDate();
 		String pubDateString;
 		if (pubDate != null) {
-			pubDateString = DateFormat.getDateInstance().format(pubDate);
+			SimpleDateFormat df = new SimpleDateFormat(context.getString(R.string.dateFormat));
+			pubDateString = df.format(pubDate);
 		} else {
 			pubDateString = "";
 			Log.e("PodcastAdapter", "Unable to find pubDate from rss data!");

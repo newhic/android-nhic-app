@@ -69,6 +69,9 @@
         <item>@string/germanPodcastURL</item>
     </string-array>
 
+    <!-- Date format strings -->
+    <string name="dateFormat">MM/dd/yyyy</string>
+
     <!-- Home page vision, statement, values -->
     <string-array name="home_page_values">
         <item>Our Vision</item>

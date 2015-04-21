@@ -2,6 +2,7 @@ package apps4christ.android.nhicapp.announcements;
 
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class AnnounceAdapter extends ArrayAdapter<RssItem> {
 	
 	private LayoutInflater inflater;
 	private List<RssItem> datas;
+	private Context context;
 	
 	static class ViewHolder {
 		TextView titleView;
@@ -35,6 +37,7 @@ public class AnnounceAdapter extends ArrayAdapter<RssItem> {
 		// TODO Auto-generated constructor stub
 		inflater = ((Activity) context).getLayoutInflater();
 		datas = objects;
+		this.context = context;
 	}
 	
 	public View getView(int position, View convertView, ViewGroup parent) {
@@ -62,7 +65,8 @@ public class AnnounceAdapter extends ArrayAdapter<RssItem> {
 		Date pubDate = datas.get(position).getPubDate();
 		String pubDateString;
 		if (pubDate != null) {
-			pubDateString = DateFormat.getDateInstance().format(pubDate);
+			SimpleDateFormat df = new SimpleDateFormat(context.getString(R.string.dateFormat));
+			pubDateString = df.format(pubDate);
 		} else {
 			pubDateString = "";
 			Log.e("AnnounceAdapter", "Error in parsing date!");
