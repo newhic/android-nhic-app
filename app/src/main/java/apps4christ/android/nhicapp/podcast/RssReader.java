@@ -5,6 +5,8 @@ import java.util.List;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import apps4christ.android.nhicapp.data.RssItem;
+
 public class RssReader {
 	
 	private String rssUrl;

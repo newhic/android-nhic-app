@@ -3,6 +3,7 @@ package apps4christ.android.nhicapp.podcast;
 import java.util.List;
 
 import apps4christ.android.nhicapp.audioplayer.AudioPlayerActivity;
+import apps4christ.android.nhicapp.data.RssItem;
 import apps4christ.android.nhicapp.main.JSoupActivity;
 
 import android.app.Activity;

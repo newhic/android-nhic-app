@@ -14,6 +14,7 @@
         android:id="@+id/inputSearch"
         android:hint="@string/searchHint"
         android:maxLines="1"
+        android:inputType="text"
         android:layout_height="wrap_content" 
         android:layout_width="fill_parent" />
     
