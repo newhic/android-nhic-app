@@ -49,6 +49,7 @@ public class PodcastAdapter extends ArrayAdapter<RssItem> {
 		super(context, textViewResourceId, new ArrayList<>(rssItems));
 		inflater = ((Activity) context).getLayoutInflater();
 		this.originalRssItems = new ArrayList<>(rssItems);
+		this.context = context;
 	}
 
 	@Override
