@@ -1,14 +1,22 @@
 <resources>
-
+    <!-- General App Colors -->
     <color name="black_overlay">#660000</color>
-    <color name="list_item_title">#000000</color>
     <color name="html_title">#a74332</color>
-    <color name="list_background">#ffffff</color>
-    <color name="list_background_pressed">#e3e2d3</color>
-    <color name="list_divider">#ffffff</color>
-    <color name="counter_text_bg">#626262</color>
-    <color name="counter_text_color">#c5c4c4</color>
     <color name="church_bg_color">#4f4132</color>
     <color name="spinner_bg_color">#ffffff</color>
+
+    <!-- Sliding Menu Navigation Drawer Colors -->
+    <color name="list_background">#ffffff</color>
+    <color name="list_background_pressed">#ffc04d</color>
+    <color name="list_divider">#ffffff</color>
+    <color name="list_item_title">#000000</color>
+    <color name="counter_text_bg">#626262</color>
+    <color name="counter_text_color">#c5c4c4</color>
+
+    <!-- Podcast Audioplayer Item Colors -->
+    <color name="podcast_title">#a74332</color>
+    <color name="podcast_time">#a74332</color>
+    <color name="podcast_ctrl_header">#ffc04d</color>
+    <color name="podcast_seekbar">#ffc04d</color>
     <color name="podcast_bg_color">#323467</color>
 </resources>
