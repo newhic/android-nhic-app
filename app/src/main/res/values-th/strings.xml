@@ -98,13 +98,14 @@
 
     <string name="EULA">Copyright 2014 New Hope International Church. All rights reserved. This software may not be copied, reproduced, transmitted, reduced to any electronic medium or machine readable format without prior consent in writing from New Hope International Church or AppsForChrist. Users may not modify, translate, or decompile into its constituent source code. DISCLAIMER: User acknowledges that the software may not be free from defects and may not satisfy all user needs. In no event will New Hope International Church or AppsForChrist be held liable for direct, indirect, incidental or consequential damages. These damages cover defects on the device, or financial loss.   </string>
 
-    <string name ="nhicAckPpl">Samantha Aw, Tara Bastatas, Martha Bailon, Kyla Hoggard, Kevin Hsu, Steven Hsu, Eric Hu, Spencer Huang, Joy Macaluso, Pat Macaluso, Sherry Ren, Dawn Roman, Joanne Shea, Rachel Tien, Aaron Tokita, Kenny Tsai, Eric Wang, Annie Wong. </string>
+    <string name ="nhicAckPpl">Samantha Aw, Tara Bastatas, Martha Bailon, Joe Chee, Kyla Hoggard, Kevin Hsu, Steven Hsu, Eric Hu, Spencer Huang, Joy Macaluso, Pat Macaluso, Sherry Ren, Dawn Roman, Joanne Shea, Rachel Tien, Aaron Tokita, Kenny Tsai, Eric Wang, Annie Wong. </string>
 
     <!-- Acknowledgements Items -->
     <string-array name="ack_items">
         <item>Samantha Aw</item>
         <item>Tara Bastatas</item>
         <item>Martha Bailon</item>
+        <item>Joe Chee</item>
         <item>Kyla Hoggard</item>
         <item>Kevin Hsu</item>
         <item>Steven Hsu</item>
