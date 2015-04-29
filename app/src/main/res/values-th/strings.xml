@@ -76,29 +76,28 @@
     <string name="prefPolCatTitle">นโยบายความเป็นส่วนตัว</string> //Privacy Policy
 
     <string name="prefLangTitle">ภาษา พอดคาสต์</string> //Podcast Language
-    <string name="prefLangSumm">Select the language you want podcast default to be in</string>
+    <string name="prefLangSumm">กรุณาเลือกที่ท่านต้องการ</string> //Select the language
 
     <string name="prefAbtTitle">เกี่ยวกับ</string>
-    <string name="prefAbtSumm">About the developer and the NHIC app</string>
+    <string name="prefAbtSumm">เกี่ยวกับ โปรแกรม นิวฮิค (NHIC APP) และผู้ดูแลโปรแกรม</string> //About the developer
 
     <string name="prefAckTitle">แสดงความขอบคุณ</string> //Acknowledgements
-    <string name="prefAckSumm">The people who have made this app possible through their support</string>
+    <string name="prefAckSumm">ผู้ที่ส่วนร่วมในการจัดทำโปรแกรมนี้จะชื่อในการร่วมก่อตั้ง</string>
 
     <string name="prefPolTitle">นโยบาย</string> //Policy
 
-
-    <string name="aboutDev">Apps4Christ is a development team aimed at creating apps for church communities. As software engineers by trade, they hope to use their skills for the glory of God\'s kingdom! </string>
-    <string name="aboutApp">The NHIC App was birthed when the Ohana caregroups started their weekly sermon listening. While it was much easier for iTunes users to get the podcasts, the rest of us had to rely on dropbox. Uploading and downloading the sermons proved to be a complicated process and a new way of doing things was needed. The NHIC App started off as a simple podcast application but slowly morphed into a fully featured app. As it is an ongoing project, please feel free to report bugs by emailing nhicdev@gmail.com. Please include your phone model in the report.</string>
+    <string name="aboutDev">แอปส์โฟรไครส์ (Apps4Christ) มีจุดประสงค์ เพื่อพัฒนาสัมพันธ์ในคริสตจักร โดยสมาชิกจะสามารถใช้ของประทานเพื่อพระสิริ และอาณาจักรของพระเจ้าผ่านโปรแกรมนี้</string> //aboutDev
+   <string name ="aboutApp">โปรแกรม นิวฮิค (NHIC APP) ได้ก่อตั้งขึ้นเมื่อกลุ่มสามัคคีธรรม Ohana ได้เริ่มมีกิจกรรมในการฟังคำเทศนาในทุกสัปดาห์ ขณะนั้นบางคนนั้นได้เลือกใช้งานผ่าน Podcast ของโปรแกรม Itunes ซึ่งมีความสะดวกสบาย แต่ในขณะที่คนบางส่วนยังต้องพึ่งพาโปรแกรม Dropbox ซึ่ง
+โปรแกรมอาจจะยังมีข้อจำกัดในการดาวน์โหลด และการใช้งานอยู่บ้าง ดังนั้นทางผู้จัดตั้งโปรแกรมจึงได้มีการพัฒนาโปรแกรม นิวฮิคให้ใช้งานให้ดีขึ้น เพื่อประโยชน์แก่ส่วนรวมต่อไป หากท่านมีสงสัย หรือต้องการสอบถาม กรุณาติดต่อรเราได้ทาง อีเมลล์ : nhicdev@gmail.com หรือ กรอกข้อมูลด้านล่าง เพื่อระบบจะทำการส่งข้อความเราต่อไป </string>
 
 
     <string name="prefVersion">NHIC รุ่น แอพพลิเคชัน</string>
 
-    <string name="testerAck">Special thanks to the following people who let me try untested software on their phones. Thank you for all the initial bug reports, contributions, and encouragement.</string>
-    <string name ="nhicAck">To the NHIC staff, thank you for all your encouragement and support in to making this a reality. </string>
+    <string name="testerAck">ขอขอบพระคุณสำหรับผู้ที่มีส่วนร่วม ซึ่งคอยสนับสนุน และอนุญาตให้เราได้ทดลองระบบผ่านโทรศัพท์มือถือของท่าน ขอขอบคุณอีกครั้งที่ท่านมาเป็นส่วนหนึ่งในการทดสอบและพัฒนา</string>
+    <string name ="nhicAck">ขอขอบคุณสำหรับทีมงานของคริสตร์นิวโฮป อินเตอร์เนชั่นแนล (New Hope International Church: NHIC) ที่คอยให้ความช่วยเหลือ สนับสนุน รวมทั้งคำหนุนใจต่างๆ ที่มีส่วนช่วยอย่างมากในความสำเร็จ </string>
+    <string name="EULA">© สงวนลิขสิทธิ์ 2014 คริสตจักรนิวโฮปอินเตอร์เนชันแนล (New Hope International Church) สงวนลิขสิทธิ์ตามกฎหมาย ไม่อนุญาตให้ทำการคัดลอก, ทำซ้ำ, ส่งต่อ หรือดัดแปลงซอฟท์แวร์นี้เป็นสื่ออิเลกทรอนิกส์หรือรูปแบบอื่นใดที่ใช้ คอมพิวเตอร์อ่านได้ นอกจากได้รับความเห็นชอบเป็นลายลักษณ์อักษรจากคริสตจักร นิวโฮปอินเตอร์เนชันแนล หรือ AppsForChrist ก่อน และไม่อนุญาตให้ผู้ใช้งานทำการแก้ไข, เปลี่ยนแปลงหรือแยกส่วนประกอบรหัสต้นฉบับซอฟท์แวร์นี้ การจำกัดความรับผิด: ผู้ ใช้งานรับทราบว่าซอฟท์แวร์นี้ยังอาจมีข้อบกพร่องและอาจไม่ตอบสนองทุกความ ต้องการในการใช้งานได้ ทั้งนี้คริสตจักร นิวโฮปอินเตอร์เนชันแนล หรือ AppsForChrist ไม่มีส่วนในการรับผิดชอบความเสียหายใดๆที่อาจเกิดขึ้น ทั้งโดยทางตรง, ทางอ้อม, ความเสียหายที่เกิดขึ้นโดยไม่เจตนาหรือโดยผลกระทบสืบเนื่องมาก็ตาม ความเสียหายดังกล่าวหมายรวมถึงความบกพร่องของอุปกรณ์อิเลคทรอนิกส์หรือความเสียหาย ทางทรัพย์สิน</string>
 
-    <string name="EULA">Copyright 2014 New Hope International Church. All rights reserved. This software may not be copied, reproduced, transmitted, reduced to any electronic medium or machine readable format without prior consent in writing from New Hope International Church or AppsForChrist. Users may not modify, translate, or decompile into its constituent source code. DISCLAIMER: User acknowledges that the software may not be free from defects and may not satisfy all user needs. In no event will New Hope International Church or AppsForChrist be held liable for direct, indirect, incidental or consequential damages. These damages cover defects on the device, or financial loss.   </string>
-
-    <string name ="nhicAckPpl">Samantha Aw, Tara Bastatas, Martha Bailon, Joe Chee, Kyla Hoggard, Kevin Hsu, Steven Hsu, Eric Hu, Spencer Huang, Joy Macaluso, Pat Macaluso, Sherry Ren, Dawn Roman, Joanne Shea, Rachel Tien, Aaron Tokita, Kenny Tsai, Eric Wang, Annie Wong. </string>
+    <string name ="nhicAckPpl">Samantha Aw, Tara Bastatas, Martha Bailon, Joe Chee, Kyla Hoggard, Kevin Hsu, Steven Hsu, Eric Hu, Spencer Huang, Numwhan Itiponpak, Joy Macaluso, Pat Macaluso, Sherry Ren, Dawn Roman, Joanne Shea, Rachel Tien, Aaron Tokita, Kenny Tsai, Eric Wang, Annie Wong. </string>
 
     <!-- Acknowledgements Items -->
     <string-array name="ack_items">
@@ -111,6 +110,7 @@
         <item>Steven Hsu</item>
         <item>Eric Hu</item>
         <item>Spencer Huang</item>
+        <item>Numwhan Itiponpak</item>
         <item>Joy Macaluso</item>
         <item>Pat Macaluso</item>
         <item>Sherry Ren</item>
