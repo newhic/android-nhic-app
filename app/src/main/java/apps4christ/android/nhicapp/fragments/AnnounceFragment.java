@@ -154,10 +154,6 @@ public class AnnounceFragment extends Fragment {
 			// Set list adapter for the ListView
 			nhicItems.setAdapter(announceAdapter);
 			// nhicItems.setTextFilterEnabled(true);
-
-			// Set list view item click listener
-			nhicItems.setOnItemClickListener(new ListListener(result,
-					getActivity()));
 		} else {
 			new AlertDialog.Builder(this.getActivity())
 					.setTitle(R.string.noInternetConnectionTitle)

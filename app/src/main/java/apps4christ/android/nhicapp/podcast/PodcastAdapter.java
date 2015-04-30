@@ -33,7 +33,6 @@ public class PodcastAdapter extends ArrayAdapter<RssItem> {
 	private List<RssItem> originalRssItems;
 
 	private PodcastFilter filter;
-	private Context context;
 
 	static class ViewHolder {
 		TextView titleView;
@@ -49,7 +48,6 @@ public class PodcastAdapter extends ArrayAdapter<RssItem> {
 		super(context, textViewResourceId, new ArrayList<>(rssItems));
 		inflater = ((Activity) context).getLayoutInflater();
 		this.originalRssItems = new ArrayList<>(rssItems);
-		this.context = context;
 	}
 
 	@Override
@@ -85,6 +83,9 @@ public class PodcastAdapter extends ArrayAdapter<RssItem> {
 			viewHolder.durationView = (TextView) convertView
 					.findViewById(R.id.duration);
 			convertView.setTag(viewHolder);
+			convertView.setOnClickListener(
+					new ListListener(this.getItem(position),(Activity) getContext()));
+
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
@@ -94,7 +95,7 @@ public class PodcastAdapter extends ArrayAdapter<RssItem> {
 		Date pubDate = this.getItem(position).getPubDate();
 		String pubDateString;
 		if (pubDate != null) {
-			SimpleDateFormat df = new SimpleDateFormat(context.getString(R.string.dateFormat));
+			SimpleDateFormat df = new SimpleDateFormat(getContext().getString(R.string.dateFormat));
 			pubDateString = df.format(pubDate);
 		} else {
 			pubDateString = "";

@@ -261,9 +261,6 @@ public class PodcastFragment extends Fragment {
 			// Allow the nhicItems listView to be text filtered
 			nhicItems.setTextFilterEnabled(true);
 
-			// Set list view item click listener
-			nhicItems.setOnItemClickListener(new ListListener(result,
-					getActivity()));
 			if (inputSearch != null) {
 				setupSearchBar();
 				inputSearch.setEnabled(true);
