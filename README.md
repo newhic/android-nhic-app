@@ -76,6 +76,10 @@ Once you have completed making your own feature branch, you are ready to check o
 
 2. It will take a few minutes to build the Gradle project files. When the run button is no longer grayed out, test that everything has built properly by running and emulating the app on the provided Nexus 5 emulation image.
 
+## Filing Bugs ##
+
+In the course of your work, you may discover other bugs present. Do not fix them in your branch, rather file a new bug targeting them using our Issue Tracker. Please provide a clear title stating what the issue is. In the body of the bug, please report what device you are using, what Android version, and the steps required to reproduce the issue. The clearer you are, the easier it will be for the person who will be fixing the bug. 
+
 ## Contribution guidelines ##
 
 Please only commit changes through Android Studio. To commit changes, click VCS on the toolbar,  Git->commit. Double check you are committing the correct files, write an informative commit message addressing:
