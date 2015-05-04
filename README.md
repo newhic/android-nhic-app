@@ -2,6 +2,12 @@
 
 This README documents the steps  necessary to get the application up and running
 
+## Android Device ##
+
+While not absolutely necessary, having an actual Android device is recommended. As great as the emulator is, there are some bugs and features that can only be easily tested on an actual physical device. Do you need the latest and greatest Android phone? Absolutely not. The basic requirement is that it needs to have Android 4.0+. 
+
+Fortunately Android phones are actually fairly cheap. If you go to your Fred Meyer/Walmart/Target/Safeway store you can pick up those pre-paid phones for cheap, and not get the plan that comes along with it. Usually there are also sales. For example, I picked up a $99 LG Optimus Fuel for $19.99. 
+
 ## Android Studio ##
 
 Finding the tools necessary for Android development is rather simple. Whether you have a Linux, Mac, or Windows machine, you can develop for Android by downloading Android Studio at http://developer.android.com/sdk/index.html
