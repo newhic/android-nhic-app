@@ -23,10 +23,10 @@ Many online guides will show setup procedures for Eclipse SDK development. Howev
 Just because you are a Java pro doesn't mean you can write an Android app from scratch. There's a bit of a learning curve and the following tutorials will help you overcome that. 
 These will familiarize you with small aspects of the NHIC App. Some of these assume the use of Eclipse. Stick with Android Studio. 
 
-Intro: http://www.techotopia.com/index.php/Creating_an_Example_Android_App_in_Android_Studio
-Layouts: http://www.androidhive.info/2011/07/android-layouts-linear-layout-relative-layout-and-table-layout/
-Media Player: http://code.tutsplus.com/tutorials/create-a-music-player-on-android-song-playback--mobile-22778
-Rss Reader: http://www.androidpit.com/java-guide-2-program-your-own-rss-reader
+1. Intro: http://www.techotopia.com/index.php/Creating_an_Example_Android_App_in_Android_Studio
+2. Layouts: http://www.androidhive.info/2011/07/android-layouts-linear-layout-relative-layout-and-table-layout/
+3. Media Player: http://code.tutsplus.com/tutorials/create-a-music-player-on-android-song-playback--mobile-22778
+4. Rss Reader: http://www.androidpit.com/java-guide-2-program-your-own-rss-reader
 
 
 ## Source Control: Git ##
