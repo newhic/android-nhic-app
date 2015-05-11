@@ -18,6 +18,17 @@ The caveat though is that the Android Studio emulator will not run on Macs with 
 
 Many online guides will show setup procedures for Eclipse SDK development. However, Android Studio is now the official Android SDK. 
 
+## Getting Familiar with Android ##
+
+Just because you are a Java pro doesn't mean you can write an Android app from scratch. There's a bit of a learning curve and the following tutorials will help you overcome that. 
+These will familiarize you with small aspects of the NHIC App. Some of these assume the use of Eclipse. Stick with Android Studio. 
+
+Intro: http://www.techotopia.com/index.php/Creating_an_Example_Android_App_in_Android_Studio
+Layouts: http://www.androidhive.info/2011/07/android-layouts-linear-layout-relative-layout-and-table-layout/
+Media Player: http://code.tutsplus.com/tutorials/create-a-music-player-on-android-song-playback--mobile-22778
+Rss Reader: http://www.androidpit.com/java-guide-2-program-your-own-rss-reader
+
+
 ## Source Control: Git ##
 
 We will be using Git for source control for this project. Git was originally developed in 2005 for kernel projects by Linus Torvalds. For more information, please see: http://en.wikipedia.org/wiki/Git_%28software%29
