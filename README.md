@@ -25,8 +25,10 @@ These will familiarize you with small aspects of the NHIC App. Some of these ass
 
 1. Intro: http://www.techotopia.com/index.php/Creating_an_Example_Android_App_in_Android_Studio
 2. Layouts: http://www.androidhive.info/2011/07/android-layouts-linear-layout-relative-layout-and-table-layout/
-3. Media Player: http://code.tutsplus.com/tutorials/create-a-music-player-on-android-song-playback--mobile-22778
-4. Rss Reader: http://www.androidpit.com/java-guide-2-program-your-own-rss-reader
+3. Navigation Drawer: http://www.learn2crack.com/2014/06/android-sliding-navigation-drawer-example.html, http://www.theappguruz.com/tutorial/android-sliding-menu-demo/
+4. Tab Bar: http://javapapers.com/android/android-tab-layout-tutorial/
+5. Media Player: http://code.tutsplus.com/tutorials/create-a-music-player-on-android-song-playback--mobile-22778
+6. Rss Reader: http://www.androidpit.com/java-guide-2-program-your-own-rss-reader
 
 
 ## Source Control: Git ##
