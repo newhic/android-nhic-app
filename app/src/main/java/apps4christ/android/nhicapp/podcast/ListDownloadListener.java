@@ -38,11 +38,12 @@ public class ListDownloadListener implements OnClickListener {
 
 	public void onClick(View view) {
 		String url;
-        String podcastTitle;
+		String podcastTitle;
 		Intent i;
 
 		// Get the url for the podcast
-        url = listItem.getEnclosure();
+
+		url = listItem.getEnclosure();
 
 		DownloadManager dm = (DownloadManager) this.activity.getSystemService(Context.DOWNLOAD_SERVICE);
 		DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
