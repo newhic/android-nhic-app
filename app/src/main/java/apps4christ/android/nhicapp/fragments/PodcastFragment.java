@@ -98,7 +98,9 @@ public class PodcastFragment extends Fragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-
+		if (this.podcastAdapter != null) {
+			this.podcastAdapter.notifyDataSetChanged();
+		}
 		dbgTracker.setScreenName("Podcasts");
 		dbgTracker.send(new HitBuilders.AppViewBuilder().build());
 	}

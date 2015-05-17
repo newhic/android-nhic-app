@@ -3,18 +3,24 @@ package apps4christ.android.nhicapp.podcast;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import apps4christ.android.nhicapp.R;
 import apps4christ.android.nhicapp.data.RssItem;
 
+import android.app.DownloadManager;
 import android.content.Context;
+import android.database.Cursor;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 import android.app.Activity;
 import android.widget.Filter;
@@ -39,6 +45,7 @@ public class PodcastAdapter extends ArrayAdapter<RssItem> {
 		TextView dateView;
 		TextView pastorView;
 		TextView durationView;
+		View downloadButton;
 	}
 
 	// Constructor for Podcast Adapter
@@ -82,15 +89,21 @@ public class PodcastAdapter extends ArrayAdapter<RssItem> {
 					.findViewById(R.id.pastorName);
 			viewHolder.durationView = (TextView) convertView
 					.findViewById(R.id.duration);
+			viewHolder.downloadButton = convertView.findViewById(R.id.downloadButton);
 			convertView.setTag(viewHolder);
-			convertView.setOnClickListener(
-					new ListListener(this.getItem(position),(Activity) getContext()));
-
+			ListListener viewListener = new ListListener(this.getItem(position),(Activity) getContext());
+			convertView.findViewById(R.id.viewButton).setOnClickListener(viewListener);
+			ListDownloadListener downloadListener = new ListDownloadListener(
+					this.getItem(position),(Activity) getContext(), this);
+			viewHolder.downloadButton.setOnClickListener(downloadListener);
+			convertView.setOnClickListener(viewListener);
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 
 		viewHolder.titleView.setText(this.getItem(position).getTitle());
+
+		viewHolder.downloadButton.setEnabled(!isTitlePresentInDownloadManager(this.getItem(position).getTitle()));
 
 		Date pubDate = this.getItem(position).getPubDate();
 		String pubDateString;
@@ -107,6 +120,25 @@ public class PodcastAdapter extends ArrayAdapter<RssItem> {
 		viewHolder.durationView.setText(this.getItem(position).getDuration());
 
 		return convertView;
+	}
+
+	private boolean isTitlePresentInDownloadManager(String downloadTitle) {
+		DownloadManager dm = (DownloadManager) this.getContext().getSystemService(Context.DOWNLOAD_SERVICE);
+		DownloadManager.Query query = new DownloadManager.Query();
+		Cursor c = dm.query(query);
+		// Disable download if already present
+		boolean titlePresentInDownloadManager = false;
+		c.moveToFirst();
+		while (!c.isAfterLast()) {
+			String title = c.getString(c.getColumnIndex(DownloadManager.COLUMN_TITLE));
+			if (title.equals(downloadTitle)) {
+				titlePresentInDownloadManager = true;
+				break;
+			}
+			c.moveToNext();
+		}
+		c.close();
+		return titlePresentInDownloadManager;
 	}
 
 	/*
