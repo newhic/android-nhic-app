@@ -34,6 +34,8 @@ public class AudioPlayerActivity extends Activity implements SeekBar.OnSeekBarCh
 	private int seekForwardTime = 5000; // 5000 milliseconds
 	private int seekBackwardTime = 5000; // 5000 milliseconds
 
+	//Hello Derek
+
     private Intent intent;
     private String url;
     private String podcastTitle;
