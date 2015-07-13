@@ -20,8 +20,6 @@ import com.google.android.gms.analytics.Tracker;
 public class AudioPlayerActivity extends Activity implements SeekBar.OnSeekBarChangeListener {
 
 	private ImageButton btnPlay;
-	private ImageButton btnForward;
-	private ImageButton btnBackward;
 	private SeekBar songProgressBar;
 	private TextView songTitleLabel;
 	private TextView songCurrentDurationLabel;
@@ -29,14 +27,13 @@ public class AudioPlayerActivity extends Activity implements SeekBar.OnSeekBarCh
 	// Media Player
 	private  MediaPlayer mp;
 	// Handler to update UI timer, progress bar etc,.
-	private Handler mHandler = new Handler();;
+	private Handler mHandler = new Handler();
 	private Utilities utils;
 	private int seekForwardTime = 5000; // 5000 milliseconds
 	private int seekBackwardTime = 5000; // 5000 milliseconds
 
 	//Hello Derek
 
-    private Intent intent;
     private String url;
     private String podcastTitle;
     static final String PODCAST_POS = "podcastPos";
@@ -49,7 +46,11 @@ public class AudioPlayerActivity extends Activity implements SeekBar.OnSeekBarCh
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.player);
-		
+
+		ImageButton btnForward;
+		ImageButton btnBackward;
+		Intent intent;
+
 		// All player buttons
 		btnPlay = (ImageButton) findViewById(R.id.btnPlay);
 		btnForward = (ImageButton) findViewById(R.id.btnForward);
