@@ -25,7 +25,7 @@
             android:textSize="16dp"
             android:paddingLeft="10dp"
             android:textStyle="bold"
-            android:text="The Holy Spirit"
+            android:text="@string/holySpiritString"
             android:layout_marginTop="10dp"/>
 
     </LinearLayout>
