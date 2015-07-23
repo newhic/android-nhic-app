@@ -9,9 +9,7 @@ import apps4christ.android.nhicapp.BuildConfig;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
@@ -23,7 +21,6 @@ public class SettingsFragment extends PreferenceFragment {
 	public SettingsFragment() {
 	}
 
-	public Context context;
 	public Fragment acknFrag = new AcknFragment();
 	public Fragment aboutFrag = new AboutFragment();
 	public Fragment licenseFrag = new LicenseFragment();
@@ -40,9 +37,9 @@ public class SettingsFragment extends PreferenceFragment {
 		// Load the preferences from an XML resource
 		addPreferencesFromResource(R.xml.preferences);
 
-		aboutPref = (Preference) findPreference("aboutPrefKey");
-		acknPref = (Preference) findPreference("ackPrefKey");
-		eulaPref = (Preference) findPreference("eulaPrefKey");
+		aboutPref = findPreference("aboutPrefKey");
+		acknPref  = findPreference("ackPrefKey");
+		eulaPref  = findPreference("eulaPrefKey");
 
 		aboutPref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			public boolean onPreferenceClick(Preference preference) {

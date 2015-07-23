@@ -1,7 +1,6 @@
 package apps4christ.android.nhicapp.announcements;
 
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;

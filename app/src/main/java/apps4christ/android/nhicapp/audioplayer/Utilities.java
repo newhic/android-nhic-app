@@ -36,7 +36,7 @@ public class Utilities {
 	/**
 	 * Function to get Progress percentage
 	 * @param currentDuration - tells how far in a sermon
-	 * @param totalDuration - tells total legnth of a sermon
+	 * @param totalDuration - tells total length of a sermon
 	 * */
 	public int getProgressPercentage(long currentDuration, long totalDuration){
 		Double percentage;
