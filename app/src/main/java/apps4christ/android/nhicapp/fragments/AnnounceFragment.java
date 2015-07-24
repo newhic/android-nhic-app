@@ -58,7 +58,7 @@ public class AnnounceFragment extends Fragment {
 
 		announceFragView = rootView;
 
-        spinnerView = (View) announceFragView
+        spinnerView = announceFragView
                 .findViewById(R.id.announceloadingSpinner);
 
 		/* Check for internet connectivity to avoid exceptions */
@@ -137,7 +137,7 @@ public class AnnounceFragment extends Fragment {
 	public void renderFragment(List<RssItem> result) {
 		rssList = result;
 		// Set reference to loading bar
-		View progressBar = (View) announceFragView
+		View progressBar = announceFragView
 				.findViewById(R.id.announceloadingSpinner);
 		// Hide the loading bar
 		progressBar.setVisibility(View.GONE);

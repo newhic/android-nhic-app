@@ -10,7 +10,7 @@
         android:id="@+id/homeImage"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/logoSize"
-        android:contentDescription="Image"
+        android:contentDescription="@string/imageString"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_newhopelogo" />
 

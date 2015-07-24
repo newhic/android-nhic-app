@@ -21,7 +21,7 @@
 		style="?android:progressBarStyleLarge"
 		android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="True"
-        android:layout_centerHorizontal="True"/>
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

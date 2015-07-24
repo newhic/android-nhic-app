@@ -58,7 +58,7 @@ public class PodcastFragment extends Fragment {
 				false);
 		podcastFragView = rootView;
 		inputSearch = (EditText) podcastFragView.findViewById(R.id.inputSearch);
-        spinnerView = (View) podcastFragView
+        spinnerView = podcastFragView
                 .findViewById(R.id.podcastloadingSpinner);
 
 		/* Check for internet connectivity to avoid exceptions */

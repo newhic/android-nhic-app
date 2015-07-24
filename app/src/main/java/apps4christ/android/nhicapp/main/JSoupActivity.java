@@ -6,14 +6,11 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
-import android.webkit.WebView;
 import android.os.AsyncTask;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.safety.Whitelist;
 import org.jsoup.select.Elements;
-import apps4christ.android.nhicapp.main.ConnectionDetector;
 import java.io.IOException;
 
 import android.widget.TextView;
@@ -29,10 +26,12 @@ import apps4christ.android.nhicapp.R;
  */
 public class JSoupActivity extends Activity {
     private String url;
-    private Intent intent;
     Tracker dbgTracker;
 
     public void onCreate(Bundle savedInstanceState) {
+
+        Intent intent;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.webcontent_main);
 
@@ -75,7 +74,7 @@ public class JSoupActivity extends Activity {
         protected void onPreExecute() {
             super.onPreExecute();
 
-            progressBar = (View) findViewById(R.id.jSoupLoadingSpinner);
+            progressBar = findViewById(R.id.jSoupLoadingSpinner);
         }
 
         @Override
