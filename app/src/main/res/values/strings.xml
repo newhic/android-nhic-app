@@ -125,8 +125,9 @@
     <string name="testerAck">Special thanks to the following people who let me try untested software on their phones. Thank you for all the initial bug reports, contributions, and encouragement.</string>
     <string name ="nhicAck">To the NHIC staff, thank you for all your encouragement and support in to making this a reality. </string>
 
-    <string name ="nhicAckPpl">Samantha Aw, Tara Bastatas, Martha Bailon, Joe Chee, Kyla Hoggard, Kevin Hsu, Steven Hsu, Eric Hu, Spencer Huang, Joy Macaluso, Pat Macaluso, Sherry Ren, Dawn Roman, Joanne Shea, Rachel Tien, Aaron Tokita, Kenny Tsai, Eric Wang, Annie Wong. </string>
-
+    <string name ="nhicAckPpl">Samantha Aw, Tara Bastatas, Martha Bailon, Kyla Hoggard, Kevin Hsu, Eric Hu, Spencer Huang, Joy Macaluso, Pat Macaluso, Sherry Ren, Dawn Roman, Joanne Shea, Rachel Tien, Aaron Tokita, Kenny Tsai, Eric Wang, Annie Wong. </string>
+    <string name = "DevAck">Special thanks to the following people who helped with the development of the app</string>
+    <string name = "DevAckPpl">Joe Chee, Zechariah Cheung, Steven Hsu, Peter Hu, Mark Merin, Torey Tokita, Joseph Tsai, Derek Tseng</string>
     <!-- Acknowledgements Items -->
     <string-array name="ack_items">
         <item>Samantha Aw</item>
@@ -153,4 +154,5 @@
     <string name="imageString">Image</string>
     <string name="blankString">         </string>
     <string name="holySpiritString">The Holy Spirit</string>
+    <!--random-->
 </resources>
