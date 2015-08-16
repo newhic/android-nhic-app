@@ -16,8 +16,6 @@ public class ConnectionDetector {
  
     public boolean isConnectingToInternet(){
 
-        boolean connection = false;
-
         ConnectivityManager connectivity = (ConnectivityManager) _context.getSystemService(Context.CONNECTIVITY_SERVICE);
           if (connectivity != null) 
           {
@@ -26,11 +24,11 @@ public class ConnectionDetector {
                   for (NetworkInfo i : info)
                       if (i.getState() == NetworkInfo.State.CONNECTED)
                       {
-                          connection = true;
+                          return true;
                       }
 
           }
-          return connection;
+          return false;
     }
     
     public void showAlertDialog()
