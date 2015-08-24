@@ -35,6 +35,9 @@ These will familiarize you with small aspects of the NHIC App. Some of these ass
 
 We will be using Git for source control for this project. Git was originally developed in 2005 for kernel projects by Linus Torvalds. For more information, please see: http://en.wikipedia.org/wiki/Git_%28software%29
 
+For a quick explanation of what Source Control is, watch the following video
+https://www.youtube.com/watch?v=xegsChaAZL4
+
 1. Download and install Git from http://git-scm.com/downloads
 
 2. Follow the wizard and choose all default options. 
