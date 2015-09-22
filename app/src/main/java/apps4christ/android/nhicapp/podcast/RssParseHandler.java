@@ -32,7 +32,7 @@ public class RssParseHandler extends DefaultHandler {
 	private boolean parsingDesc;
 
 	public RssParseHandler() {
-		rssItems = new ArrayList<RssItem>();
+		rssItems = new ArrayList<>();
 	}
 
 	public List<RssItem> getItems() {
