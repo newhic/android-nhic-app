@@ -106,7 +106,7 @@ public class PodcastFragment extends Fragment {
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		if (rssList != null) {
-			outState.putParcelableArrayList("rssList", new ArrayList<RssItem>(rssList));
+			outState.putParcelableArrayList("rssList", new ArrayList<>(rssList));
 		}
 		super.onSaveInstanceState(outState);
 	}
@@ -125,7 +125,7 @@ public class PodcastFragment extends Fragment {
 
         bar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 
-        langSel = new ArrayAdapter<String>(bar.getThemedContext(),
+        langSel = new ArrayAdapter<>(bar.getThemedContext(),
                 android.R.layout.simple_spinner_dropdown_item, getResources()
                 .getStringArray(R.array.podcast_lang_select));
 
@@ -176,9 +176,9 @@ public class PodcastFragment extends Fragment {
 		//TODO: Refactor inputSearch to remove the dead textChangedListeners
 		assert (inputSearch != null);
 
-		if (this.podcastAdapter != null) {
-			this.podcastAdapter.resetData();
-			this.podcastAdapter.getFilter().filter(inputSearch.getText());
+		if (podcastAdapter != null) {
+			podcastAdapter.resetData();
+			podcastAdapter.getFilter().filter(inputSearch.getText());
 		}
 		inputSearch.addTextChangedListener(new TextWatcher() {
 
@@ -189,7 +189,7 @@ public class PodcastFragment extends Fragment {
 				if (count < before) {
 					// On backspace.
 					Log.d("counttracker", "count is < before");
-					PodcastFragment.this.podcastAdapter.resetData();
+					podcastAdapter.resetData();
 				}
 
 				// When user changed the Text
@@ -198,8 +198,8 @@ public class PodcastFragment extends Fragment {
 					when the inputSearch is created (before the
 				 	podcastAdapter is created)
 				*/
-				if (PodcastFragment.this.podcastAdapter != null) {
-					PodcastFragment.this.podcastAdapter.getFilter().filter(cs);
+				if (podcastAdapter != null) {
+					podcastAdapter.getFilter().filter(cs);
 				}
 
 			}

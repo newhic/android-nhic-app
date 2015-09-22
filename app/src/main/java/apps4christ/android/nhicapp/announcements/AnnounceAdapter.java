@@ -22,7 +22,8 @@ public class AnnounceAdapter extends ArrayAdapter<RssItem> {
 	private LayoutInflater inflater;
 	private List<RssItem> datas;
 	private Context context;
-	
+	private int textViewResourceId;
+
 	static class ViewHolder {
 		TextView titleView;
 		TextView dateView;
@@ -33,6 +34,7 @@ public class AnnounceAdapter extends ArrayAdapter<RssItem> {
 	public AnnounceAdapter(Context context, int textViewResourceId,
 			List<RssItem> objects) {
 		super(context, textViewResourceId, objects);
+		this.textViewResourceId = textViewResourceId;
 		// TODO Auto-generated constructor stub
 		inflater = ((Activity) context).getLayoutInflater();
 		datas = objects;

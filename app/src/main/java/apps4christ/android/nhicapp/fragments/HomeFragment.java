@@ -21,13 +21,13 @@ import java.lang.String;
 
 public class HomeFragment extends Fragment {
 
-	View homeFragView;
+	private View homeFragView;
 
 	// Variables for nearby category view
-	ListView valuesListView;
-	ArrayList<String> valuesList;
-	ArrayAdapter<String> arrayAdapter;
-	Tracker dbgTracker;
+	private ListView valuesListView;
+	private ArrayList<String> valuesList;
+	private ArrayAdapter<String> arrayAdapter;
+	private Tracker dbgTracker;
 
 	public HomeFragment() {
 	}
@@ -44,7 +44,7 @@ public class HomeFragment extends Fragment {
 
 		populateValuesList();
 
-		arrayAdapter = new ArrayAdapter<String>(getActivity(),
+		arrayAdapter = new ArrayAdapter<>(getActivity(),
 				android.R.layout.simple_list_item_1, valuesList);
 
 		// Set The Adapter
@@ -72,13 +72,13 @@ public class HomeFragment extends Fragment {
 
 	}
 
-	public void populateValuesList() {
+	private void populateValuesList() {
         String[] array;
         List<String> list;
 
         array = getResources().getStringArray(R.array.home_page_values);
         list = Arrays.asList(array);
-        valuesList = new ArrayList<String>(list);
+        valuesList = new ArrayList<>(list);
 	}
 
 }

@@ -111,7 +111,7 @@ public class AnnounceFragment extends Fragment {
 		super.onSaveInstanceState(outState);
 	}
 
-	public void CreateRSSService() {
+	private void CreateRSSService() {
 		task = new RSSTask(this);
 		assert (task != null);
 
@@ -126,7 +126,7 @@ public class AnnounceFragment extends Fragment {
 		}
 	}
 
-	public static InputStream getInputStream(URL url) {
+	private static InputStream getInputStream(URL url) {
 		try {
 			return url.openConnection().getInputStream();
 		} catch (IOException e) {
@@ -134,7 +134,7 @@ public class AnnounceFragment extends Fragment {
 		}
 	}
 
-	public void renderFragment(List<RssItem> result) {
+	private void renderFragment(List<RssItem> result) {
 		rssList = result;
 		// Set reference to loading bar
 		View progressBar = announceFragView
@@ -175,7 +175,7 @@ public class AnnounceFragment extends Fragment {
 	 * TODO: Push this into a queue that is consumed by the view
 	 *
 	 */
-	public static List<RssItem> XMLPullParserRoutine() {
+	private static List<RssItem> XMLPullParserRoutine() {
 
 		boolean insideItem = false;
 		// Used to reference item while parsing

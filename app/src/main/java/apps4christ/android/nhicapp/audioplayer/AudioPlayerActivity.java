@@ -36,11 +36,11 @@ public class AudioPlayerActivity extends Activity implements SeekBar.OnSeekBarCh
 
     private String url;
     private String podcastTitle;
-    static final String PODCAST_POS = "podcastPos";
-    static final String PODCAST_URL = "podcastUrl";
-    static final String PODCAST_TITLE = "podcastTitle";
+    private static final String PODCAST_POS = "podcastPos";
+    private static final String PODCAST_URL = "podcastUrl";
+    private static final String PODCAST_TITLE = "podcastTitle";
 
-    Tracker dbgTracker;
+    private Tracker dbgTracker;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -187,7 +187,7 @@ public class AudioPlayerActivity extends Activity implements SeekBar.OnSeekBarCh
 	 * Function to play a podcast
 	 * @param url - url of podcast
 	 * */
-	public void  playPodcast(String url, int position){
+	private void  playPodcast(String url, int position){
 		// Play podcast
 		try {
 
@@ -221,7 +221,7 @@ public class AudioPlayerActivity extends Activity implements SeekBar.OnSeekBarCh
 	/**
 	 * Update timer on seekbar
 	 * */
-	public void updateProgressBar() {
+	private void updateProgressBar() {
         mHandler.postDelayed(mUpdateTimeTask, 100);        
     }	
 	

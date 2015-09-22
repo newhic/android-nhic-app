@@ -14,9 +14,9 @@ import android.widget.AdapterView.OnItemClickListener;
 public class WebViewListListener implements OnItemClickListener {
 
 	// List item's reference
-	String[] listItems;
+	private String[] listItems;
 	// Calling activity reference
-	Activity activity;
+	private Activity activity;
 	
 	public WebViewListListener(String[] aListItems, Activity anActivity) {
 		listItems = aListItems;

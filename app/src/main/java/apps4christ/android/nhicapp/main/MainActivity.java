@@ -50,11 +50,11 @@ public class MainActivity extends Activity {
 	/* Create all the fragments on application startup so that
 	 * we do not need to create them while switching views. 
 	 */
-	Fragment homeFrag = new HomeFragment();
-	Fragment podcastFrag = new PodcastFragment();
-	Fragment announceFrag = new AnnounceFragment();
-	Fragment videosFrag = new VideosFragment();
-	Fragment settingsFrag = new SettingsFragment();
+	private Fragment homeFrag = new HomeFragment();
+	private Fragment podcastFrag = new PodcastFragment();
+	private Fragment announceFrag = new AnnounceFragment();
+	private Fragment videosFrag = new VideosFragment();
+	private Fragment settingsFrag = new SettingsFragment();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -128,7 +128,7 @@ public class MainActivity extends Activity {
 	 * stored in res/values/strings.xml
 	 */
 	private void AddAllNavDrawerItems() {
-		navDrawerItems = new ArrayList<NavDrawerItem>();
+		navDrawerItems = new ArrayList<>();
 
 		// adding nav drawer items to array
 		// Home

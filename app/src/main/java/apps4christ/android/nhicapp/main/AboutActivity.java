@@ -8,8 +8,8 @@ import android.text.method.ScrollingMovementMethod;
 import android.widget.TextView;
 
 public class AboutActivity extends Activity {
-	TextView aboutDev;
-	TextView aboutApp;
+	private TextView aboutDev;
+	private TextView aboutApp;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

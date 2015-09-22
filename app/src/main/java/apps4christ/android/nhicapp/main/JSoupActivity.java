@@ -26,7 +26,7 @@ import apps4christ.android.nhicapp.R;
  */
 public class JSoupActivity extends Activity {
     private String url;
-    Tracker dbgTracker;
+    private Tracker dbgTracker;
 
     public void onCreate(Bundle savedInstanceState) {
 
