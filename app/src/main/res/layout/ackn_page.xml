@@ -16,6 +16,9 @@
         android:scrollbars="vertical"
         android:text="@string/testerAck"
         android:textSize="@dimen/aboutText" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
 
     <TextView
         android:id="@+id/pplText"
@@ -25,6 +28,32 @@
         android:scrollbars="vertical"
         android:text="@string/nhicAckPpl"
         android:textSize="12sp" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="18dp" />
+    <TextView
+        android:id="@+id/acknText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="5"
+        android:scrollbars="vertical"
+        android:text="@string/DevAck"
+        android:textSize="@dimen/aboutText" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
+    <TextView
+        android:id="@+id/pplText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="5"
+        android:scrollbars="vertical"
+        android:text="@string/DevAckPpl"
+        android:textSize="12sp" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="18dp" />
 
     <TextView
         android:id="@+id/nhicAcknText"
