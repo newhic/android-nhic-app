@@ -8,6 +8,17 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin" >
 
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation = "vertical"
+            android:weightSum="1">
+
+
     <TextView
         android:id="@+id/acknText"
         android:layout_width="wrap_content"
@@ -26,13 +37,18 @@
         android:text="@string/nhicAckPpl"
         android:textSize="12sp" />
 
-    <TextView
+
+            <TextView
         android:id="@+id/nhicAcknText"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:maxLines="5"
         android:scrollbars="vertical"
         android:text="@string/nhicAck"
         android:textSize="@dimen/aboutText" />
+
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
