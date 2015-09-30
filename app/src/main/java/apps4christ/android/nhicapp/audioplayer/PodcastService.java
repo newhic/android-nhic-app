@@ -29,6 +29,7 @@ public class PodcastService extends Service implements
     private int seekPosn;
     private long totalDuration;
     private String podcastUrl;
+    private boolean paused;
     private final IBinder podcastBind = new PodcastBinder();
 
     @Override
@@ -90,18 +91,22 @@ public class PodcastService extends Service implements
 
     public void playPodcast() {
         //play podcast
-        player.reset();
 
-        try{
-            Log.d("DATA", "Setting Data source to url " + podcastUrl);
-            player.setDataSource(podcastUrl);
+        if(paused)
+            player.start();
+
+        else {
+            player.reset();
+
+            try {
+                Log.d("DATA", "Setting Data source to url " + podcastUrl);
+                player.setDataSource(podcastUrl);
+            } catch (Exception e) {
+                Log.e("PODCAST SERVICE", "Error setting data source", e);
+            }
+
+            player.prepareAsync();
         }
-
-        catch(Exception e){
-            Log.e("PODCAST SERVICE", "Error setting data source", e);
-        }
-
-        player.prepareAsync();
 
     }
 
@@ -113,6 +118,8 @@ public class PodcastService extends Service implements
 
         Log.d("Playback", "starting playback");
         player.start();
+
+        paused = false;
 
         totalDuration = player.getDuration();
     }
@@ -139,8 +146,21 @@ public class PodcastService extends Service implements
         return player.isPlaying();
     }
 
+    public boolean isPaused(){
+        if(paused)
+            return true;
+
+        return false;
+    }
+
+    public void setPause(boolean value){
+        paused = value;
+    }
+
     public void pause(){
         player.pause();
+        paused = true;
+
     }
 
     public void startPlaying() {
