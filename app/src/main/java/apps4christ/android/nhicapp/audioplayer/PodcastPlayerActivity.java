@@ -51,6 +51,7 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
     private int seekForwardTime = 5000; // 5000 milliseconds
     private int seekBackwardTime = 5000; // 5000 milliseconds
     private Handler mHandler = new Handler();;
+    private int position;
 
     static final String PODCAST_POS = "podcastPos";
     static final String PODCAST_URL = "podcastUrl";
@@ -102,10 +103,16 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
                 }else{
                     // Resume song
                     if(podcastSrv!=null) {
-                        if (podcastSrv.getSeekPosn() == 0)
+                   /*     if (podcastSrv.getSeekPosn() == 0) {
+                            Log.d("MD", "Playing Podcast");
                             podcastSrv.playPodcast();
-                        else
+                        }
+                        else {
+                            Log.d("MD", "start playing");
                             podcastSrv.startPlaying();
+                        }
+                        */
+                        podcastSrv.playPodcast();
 
                         // Changing button image to pause button
                         btnPlay.setImageResource(R.drawable.btn_pause);
@@ -170,6 +177,9 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
             //get service
             podcastSrv = binder.getService();
             podcastSrv.setURL(url);
+            //Setting seek position here
+            Log.d("SEEKPOSN", "Seek position is" + position);
+            podcastSrv.setSeekPos(position);
             podcastBound = true;
         }
 
@@ -211,6 +221,7 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
 
         // Restore state members from saved instance
         podcastTitle = savedInstanceState.getString(PODCAST_TITLE);
+        position = savedInstanceState.getInt(PODCAST_POS);
     }
 
     /**

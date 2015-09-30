@@ -34,6 +34,7 @@ public class PodcastService extends Service implements
     @Override
     public IBinder onBind(Intent intent) {
         // TODO Auto-generated method stub
+        Log.d("BIND", "Binding Service");
         return podcastBind;
     }
 
@@ -67,7 +68,9 @@ public class PodcastService extends Service implements
         super.onCreate();
 
         seekPosn = 0;
-        player = new MediaPlayer();
+
+        if(player == null)
+            player = new MediaPlayer();
 
         initPodcastPlayer();
     }
@@ -123,7 +126,10 @@ public class PodcastService extends Service implements
 
     public int getSeekPosn(){return seekPosn;}
 
-    public void setSeekPos(int pos){seekPosn = pos;}
+    public void setSeekPos(int pos){
+        assert(pos >= 0);
+        seekPosn = pos;
+    }
 
     public int getDur(){
         return player.getDuration();
