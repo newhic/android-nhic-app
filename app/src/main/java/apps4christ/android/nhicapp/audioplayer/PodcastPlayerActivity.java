@@ -57,6 +57,7 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
     static final String PODCAST_URL = "podcastUrl";
     static final String PODCAST_TITLE = "podcastTitle";
 
+    Tracker dbgTracker;
 
 
     @Override
@@ -167,6 +168,15 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
         });
 
         songTitleLabel.setText(podcastTitle);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        dbgTracker.setScreenName("Podcast Audioplayer");
+        dbgTracker.send(new HitBuilders.AppViewBuilder().build());
 
     }
 
