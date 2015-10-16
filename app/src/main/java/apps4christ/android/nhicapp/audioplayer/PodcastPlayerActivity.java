@@ -181,6 +181,12 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
             Log.d("SEEKPOSN", "Seek position is" + position);
             podcastSrv.setSeekPos(position);
             podcastBound = true;
+
+            /* This is mainly for updating the UI on rotation */
+            if(podcastSrv.isPlaying()) {
+                btnPlay.setImageResource(R.drawable.btn_pause);
+                updateProgressBar();
+            }
         }
 
         @Override
@@ -291,10 +297,20 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
         updateProgressBar();
     }
 
+
+    @Override
+    public void onBackPressed(){
+        Log.d("Back Pressed", "Pressed");
+        super.onBackPressed();
+
+        stopService(playIntent);
+
+    }
+
     @Override
     public void onDestroy(){
         Log.d("DESTROY", "Destroying");
-        stopService(playIntent);
+        //stopService(playIntent);
 
         /* Stop the seekbar from updating one last time */
         mHandler.removeCallbacks(mUpdateTimeTask);

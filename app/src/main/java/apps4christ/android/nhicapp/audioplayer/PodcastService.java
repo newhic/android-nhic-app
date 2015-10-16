@@ -42,9 +42,16 @@ public class PodcastService extends Service implements
     @Override
     public boolean onUnbind(Intent intent){
         Log.d("UNBIND", "Unbinding Service");
+        //player.stop();
+        //player.release();
+        return false;
+    }
+
+    @Override
+    public void onDestroy()
+    {
         player.stop();
         player.release();
-        return false;
     }
 
     @Override

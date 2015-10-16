@@ -3,6 +3,7 @@ package apps4christ.android.nhicapp.podcast;
 import java.util.List;
 
 import apps4christ.android.nhicapp.audioplayer.AudioPlayerActivity;
+import apps4christ.android.nhicapp.audioplayer.PodcastPlayerActivity;
 import apps4christ.android.nhicapp.data.RssItem;
 import apps4christ.android.nhicapp.main.JSoupActivity;
 
@@ -36,7 +37,7 @@ public class ListListener implements OnItemClickListener {
         url = listItems.get(pos).getEnclosure();
 
         if(url.contains(".mp3")) {
-            i = new Intent(activity, AudioPlayerActivity.class);
+            i = new Intent(activity, PodcastPlayerActivity.class);
             // Get the url for the podcast
             url = listItems.get(pos).getEnclosure();
             podcastTitle = listItems.get(pos).getTitle();
