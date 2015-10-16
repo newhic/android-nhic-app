@@ -21,7 +21,13 @@ import apps4christ.android.nhicapp.R;
 import apps4christ.android.nhicapp.audioplayer.PodcastService.PodcastBinder;
 
 /**
- * Created by mjmerin on 7/11/15.
+ * PodcastPlayerActivity
+ *
+ * PodcastPlayerActivity is the replacement for AudioPlayerActivity. It's more or less the same code
+ * except that it uses a Service called PodcastService.
+ *
+ * Create an activity associated with playing NHIC podcasts. Media playing is controlled via
+ * the associated PodcastService, however the UI is handled here along with the seekbar.
  */
 public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBarChangeListener {
     private ImageButton btnPlay;
@@ -41,7 +47,6 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
     private int seekForwardTime = 5000; // 5000 milliseconds
     private int seekBackwardTime = 5000; // 5000 milliseconds
     private Handler mHandler = new Handler();
-    ;
     private int position;
 
     static final String PODCAST_POS = "podcastPos";
@@ -95,15 +100,7 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
                 } else {
                     // Resume song
                     if (podcastSrv != null) {
-                   /*     if (podcastSrv.getSeekPosn() == 0) {
-                            Log.d("MD", "Playing Podcast");
-                            podcastSrv.playPodcast();
-                        }
-                        else {
-                            Log.d("MD", "start playing");
-                            podcastSrv.startPlaying();
-                        }
-                        */
+
                         podcastSrv.playPodcast();
 
                         // Changing button image to pause button
@@ -137,8 +134,8 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
         });
 
         /**
-         * Backward button click event
-         * Backward song to specified seconds
+         * Media backward button click event
+         * Media backward song to specified seconds
          * */
         btnBackward.setOnClickListener(new View.OnClickListener() {
 
@@ -175,11 +172,9 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             PodcastBinder binder = (PodcastBinder) service;
-            //get service
+
             podcastSrv = binder.getService();
             podcastSrv.setURL(url);
-            //Setting seek position here
-            Log.d("SEEKPOSN", "Seek position is" + position);
             podcastSrv.setSeekPos(position);
             podcastBound = true;
 
@@ -237,7 +232,6 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
      */
     public void updateProgressBar() {
 
-
         long totalDuration = podcastSrv.getTotalDuration();
         long currentDuration = podcastSrv.getPodcastPosn();
 
@@ -249,7 +243,6 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
         // Updating progress bar
         int progress = (utils.getProgressPercentage(currentDuration, totalDuration));
 
-        //Log.d("Progress", "Setting Progress to "+progress);
         podcastProgressBar.setProgress(progress);
 
         mHandler.postDelayed(mUpdateTimeTask, 1000);
@@ -262,7 +255,6 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
      */
     private Runnable mUpdateTimeTask = new Runnable() {
         public void run() {
-
             updateProgressBar();
         }
     };
@@ -312,7 +304,6 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
     @Override
     public void onDestroy() {
         Log.d("DESTROY", "Destroying");
-        //stopService(playIntent);
 
         /* Stop the seekbar from updating one last time */
         mHandler.removeCallbacks(mUpdateTimeTask);

@@ -9,7 +9,12 @@ import android.os.IBinder;
 import android.util.Log;
 
 /**
- * Created by mjmerin on 7/11/15.
+ * PodcastService
+ *
+ * PodcastService is the brains behind the PodcastPlayerActivity. Here, we control
+ * the media playback such as loading media, playing, media, pausing media, etc etc.
+ * In the past, we were running this in the PodcastPlayerActivity UI thread hence resulting
+ * in poor user interface experience on screen rotations.
  */
 public class PodcastService extends Service implements
         MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener,
@@ -82,8 +87,8 @@ public class PodcastService extends Service implements
         player.setOnErrorListener(this);
     }
 
+
     public void playPodcast() {
-        //play podcast
 
         if (paused)
             player.start();
