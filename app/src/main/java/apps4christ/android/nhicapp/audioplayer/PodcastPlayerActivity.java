@@ -1,39 +1,29 @@
 package apps4christ.android.nhicapp.audioplayer;
 
-import java.io.IOException;
-
 import android.app.Activity;
-import android.app.Service;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
+import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import apps4christ.android.nhicapp.R;
 
-import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
-import android.os.IBinder;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
-import android.view.MenuItem;
-import android.view.View;
-import apps4christ.android.nhicapp.audioplayer.PodcastService.PodcastBinder;
 
 import apps4christ.android.nhicapp.R;
+import apps4christ.android.nhicapp.audioplayer.PodcastService.PodcastBinder;
 
 /**
  * Created by mjmerin on 7/11/15.
  */
-public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBarChangeListener{
+public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBarChangeListener {
     private ImageButton btnPlay;
     private ImageButton btnForward;
     private ImageButton btnBackward;
@@ -43,14 +33,15 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
     private TextView songTotalDurationLabel;
     private PodcastService podcastSrv;
     private Intent playIntent;
-    private boolean podcastBound =false;
+    private boolean podcastBound = false;
     private String podcastTitle;
     private Intent intent;
     private String url;
     private Utilities utils;
     private int seekForwardTime = 5000; // 5000 milliseconds
     private int seekBackwardTime = 5000; // 5000 milliseconds
-    private Handler mHandler = new Handler();;
+    private Handler mHandler = new Handler();
+    ;
     private int position;
 
     static final String PODCAST_POS = "podcastPos";
@@ -93,17 +84,17 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
             @Override
             public void onClick(View arg0) {
                 // check for already playing
-                if(podcastSrv.isPlaying()){
-                    if(podcastSrv !=null){
+                if (podcastSrv.isPlaying()) {
+                    if (podcastSrv != null) {
                         Log.d("CONTROL", "Pausing");
                         podcastSrv.setSeekPos(podcastSrv.getPodcastPosn());
                         podcastSrv.pause();
                         // Changing button image to play button
                         btnPlay.setImageResource(R.drawable.btn_play);
                     }
-                }else{
+                } else {
                     // Resume song
-                    if(podcastSrv!=null) {
+                    if (podcastSrv != null) {
                    /*     if (podcastSrv.getSeekPosn() == 0) {
                             Log.d("MD", "Playing Podcast");
                             podcastSrv.playPodcast();
@@ -135,10 +126,10 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
                 // get current song position
                 int currentPosition = podcastSrv.getPodcastPosn();
                 // check if seekForward time is lesser than podcast duration
-                if(currentPosition + seekForwardTime <= podcastSrv.getDur()){
+                if (currentPosition + seekForwardTime <= podcastSrv.getDur()) {
                     // forward podcast
                     podcastSrv.seek(currentPosition + seekForwardTime);
-                }else{
+                } else {
                     // forward to end position
                     podcastSrv.seek(podcastSrv.getDur());
                 }
@@ -183,7 +174,7 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
     private ServiceConnection podcastConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            PodcastBinder binder = (PodcastBinder)service;
+            PodcastBinder binder = (PodcastBinder) service;
             //get service
             podcastSrv = binder.getService();
             podcastSrv.setURL(url);
@@ -193,7 +184,7 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
             podcastBound = true;
 
             /* This is mainly for updating the UI on rotation */
-            if(podcastSrv.isPlaying()) {
+            if (podcastSrv.isPlaying()) {
                 btnPlay.setImageResource(R.drawable.btn_pause);
                 updateProgressBar();
             }
@@ -204,16 +195,17 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
             podcastBound = false;
         }
     };
+
     /* When the activity instance starts, we create the Intent object if it doesn't exist
     * and bind to it and start it.
      */
     @Override
     protected void onStart() {
         super.onStart();
-        if(playIntent==null){
+        if (playIntent == null) {
             playIntent = new Intent(this, PodcastService.class);
             bindService(playIntent, podcastConnection, Context.BIND_AUTO_CREATE);
-            Log.d("Start Service", "starting the service" );
+            Log.d("Start Service", "starting the service");
 
             startService(playIntent);
         }
@@ -242,7 +234,7 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
 
     /**
      * Update timer on seekbar
-     * */
+     */
     public void updateProgressBar() {
 
 
@@ -267,7 +259,7 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
 
     /**
      * Background Runnable thread
-     * */
+     */
     private Runnable mUpdateTimeTask = new Runnable() {
         public void run() {
 
@@ -283,7 +275,7 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
 
     /**
      * When user starts moving the progress handler
-     * */
+     */
     @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
         // remove message Handler from updating progress bar
@@ -293,7 +285,7 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
 
     /**
      * When user stops moving the progress handler
-     * */
+     */
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
         mHandler.removeCallbacks(mUpdateTimeTask);
@@ -309,7 +301,7 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
 
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         Log.d("Back Pressed", "Pressed");
         super.onBackPressed();
 
@@ -318,7 +310,7 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
     }
 
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         Log.d("DESTROY", "Destroying");
         //stopService(playIntent);
 
@@ -326,7 +318,7 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
         mHandler.removeCallbacks(mUpdateTimeTask);
 
         /* Unbind the service to prevent ServiceConnection leak */
-        if(podcastConnection != null)
+        if (podcastConnection != null)
             unbindService(podcastConnection);
 
         podcastSrv = null;

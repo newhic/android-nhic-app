@@ -2,21 +2,11 @@ package apps4christ.android.nhicapp.audioplayer;
 
 import android.app.Service;
 import android.content.Intent;
-import android.media.MediaPlayer;
-import android.os.IBinder;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import android.content.ContentUris;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Binder;
-import android.os.PowerManager;
+import android.os.IBinder;
 import android.util.Log;
-import java.util.Random;
-import android.app.Notification;
-import android.app.PendingIntent;
 
 /**
  * Created by mjmerin on 7/11/15.
@@ -40,16 +30,13 @@ public class PodcastService extends Service implements
     }
 
     @Override
-    public boolean onUnbind(Intent intent){
+    public boolean onUnbind(Intent intent) {
         Log.d("UNBIND", "Unbinding Service");
-        //player.stop();
-        //player.release();
         return false;
     }
 
     @Override
-    public void onDestroy()
-    {
+    public void onDestroy() {
         player.stop();
         player.release();
     }
@@ -71,13 +58,13 @@ public class PodcastService extends Service implements
         }
     }
 
-    public void onCreate(){
+    public void onCreate() {
         //Create the service
         super.onCreate();
 
         seekPosn = 0;
 
-        if(player == null)
+        if (player == null)
             player = new MediaPlayer();
 
         initPodcastPlayer();
@@ -87,9 +74,8 @@ public class PodcastService extends Service implements
         podcastUrl = url;
     }
 
-    public void initPodcastPlayer(){
+    public void initPodcastPlayer() {
         //set player properties
-        //player.setWakeMode(getApplicationContext(), PowerManager.PARTIAL_WAKE_LOCK);
         player.setAudioStreamType(AudioManager.STREAM_MUSIC);
         player.setOnPreparedListener(this);
         player.setOnCompletionListener(this);
@@ -99,7 +85,7 @@ public class PodcastService extends Service implements
     public void playPodcast() {
         //play podcast
 
-        if(paused)
+        if (paused)
             player.start();
 
         else {
@@ -134,37 +120,39 @@ public class PodcastService extends Service implements
     // Media Player Controls
 
     // Get position of seekbar
-    public int getPodcastPosn(){
+    public int getPodcastPosn() {
         return player.getCurrentPosition();
     }
 
-    public int getSeekPosn(){return seekPosn;}
+    public int getSeekPosn() {
+        return seekPosn;
+    }
 
-    public void setSeekPos(int pos){
-        assert(pos >= 0);
+    public void setSeekPos(int pos) {
+        assert (pos >= 0);
         seekPosn = pos;
     }
 
-    public int getDur(){
+    public int getDur() {
         return player.getDuration();
     }
 
-    public boolean isPlaying(){
+    public boolean isPlaying() {
         return player.isPlaying();
     }
 
-    public boolean isPaused(){
-        if(paused)
+    public boolean isPaused() {
+        if (paused)
             return true;
 
         return false;
     }
 
-    public void setPause(boolean value){
+    public void setPause(boolean value) {
         paused = value;
     }
 
-    public void pause(){
+    public void pause() {
         player.pause();
         paused = true;
 
