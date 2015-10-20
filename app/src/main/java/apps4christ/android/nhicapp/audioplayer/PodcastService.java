@@ -29,7 +29,6 @@ public class PodcastService extends Service implements
 
     @Override
     public IBinder onBind(Intent intent) {
-        // TODO Auto-generated method stub
         Log.d("BIND", "Binding Service");
         return podcastBind;
     }
@@ -90,8 +89,9 @@ public class PodcastService extends Service implements
 
     public void playPodcast() {
 
-        if (paused)
+        if (paused) {
             player.start();
+        }
 
         else {
             player.reset();

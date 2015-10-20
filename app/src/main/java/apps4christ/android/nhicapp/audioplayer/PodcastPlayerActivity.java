@@ -30,13 +30,11 @@ import apps4christ.android.nhicapp.audioplayer.PodcastService.PodcastBinder;
  * the associated PodcastService, however the UI is handled here along with the seekbar.
  */
 public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBarChangeListener {
-    private ImageButton btnPlay;
-    private ImageButton btnForward;
-    private ImageButton btnBackward;
-    private SeekBar podcastProgressBar;
-    private TextView songTitleLabel;
+
     private TextView songCurrentDurationLabel;
     private TextView songTotalDurationLabel;
+    private ImageButton btnPlay;
+    private SeekBar podcastProgressBar;
     private PodcastService podcastSrv;
     private Intent playIntent;
     private boolean podcastBound = false;
@@ -58,6 +56,11 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+        ImageButton btnForward;
+        ImageButton btnBackward;
+        TextView songTitleLabel;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.player);
 
@@ -88,25 +91,24 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
 
             @Override
             public void onClick(View arg0) {
+
+                if(podcastSrv == null)
+                    return;
                 // check for already playing
                 if (podcastSrv.isPlaying()) {
-                    if (podcastSrv != null) {
                         Log.d("CONTROL", "Pausing");
-                        podcastSrv.setSeekPos(podcastSrv.getPodcastPosn());
                         podcastSrv.pause();
                         // Changing button image to play button
                         btnPlay.setImageResource(R.drawable.btn_play);
-                    }
+
                 } else {
                     // Resume song
-                    if (podcastSrv != null) {
-
                         podcastSrv.playPodcast();
 
                         // Changing button image to pause button
                         btnPlay.setImageResource(R.drawable.btn_pause);
                         updateProgressBar();
-                    }
+
                 }
 
             }
@@ -145,7 +147,7 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
                 int currentPosition = podcastSrv.getPodcastPosn();
                 // check if seekBackward time is greater than 0 sec
                 if (currentPosition - seekBackwardTime >= 0) {
-                    // forward podcast
+                    // Seek backwards
                     podcastSrv.seek(currentPosition - seekBackwardTime);
                 } else {
                     // backward to starting position
@@ -163,8 +165,8 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
     public void onResume() {
         super.onResume();
 
-        dbgTracker.setScreenName("Podcast Audioplayer");
-        dbgTracker.send(new HitBuilders.AppViewBuilder().build());
+        //dbgTracker.setScreenName("Podcast Audioplayer");
+        //dbgTracker.send(new HitBuilders.AppViewBuilder().build());
 
     }
 
@@ -261,7 +263,7 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
 
 
     @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromTouch) {
+         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromTouch) {
 
     }
 
