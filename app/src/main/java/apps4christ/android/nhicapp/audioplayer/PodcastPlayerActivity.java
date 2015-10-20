@@ -14,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
@@ -159,14 +160,19 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
 
         songTitleLabel.setText(podcastTitle);
 
+        String trackerId =  getResources().getString(R.string.trackingId);
+
+        dbgTracker = GoogleAnalytics.getInstance(this)
+                .newTracker(trackerId);
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
-        //dbgTracker.setScreenName("Podcast Audioplayer");
-        //dbgTracker.send(new HitBuilders.AppViewBuilder().build());
+        dbgTracker.setScreenName("Podcast Audioplayer");
+        dbgTracker.send(new HitBuilders.AppViewBuilder().build());
 
     }
 
