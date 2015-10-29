@@ -26,9 +26,11 @@
         <activity android:name="apps4christ.android.nhicapp.main.AboutActivity"></activity>
 
         <activity android:name="apps4christ.android.nhicapp.audioplayer.AudioPlayerActivity"></activity>
+        <activity android:name="apps4christ.android.nhicapp.audioplayer.PodcastPlayerActivity"></activity>
 
         <activity android:name="apps4christ.android.nhicapp.main.JSoupActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"></activity>
+        <service android:name="apps4christ.android.nhicapp.audioplayer.PodcastService"></service>
     </application>
 
 </manifest>
