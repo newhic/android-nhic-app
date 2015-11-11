@@ -79,7 +79,9 @@ public class PodcastFragment extends Fragment {
 			}
 			renderFragment(rssList);
 			spinnerView.setVisibility(View.GONE);
-		} else if (isInternetPresent) {
+		}
+
+		if (isInternetPresent) {
             CreateLanguageDropDown();
 			setupSearchBar();
 		} else {
