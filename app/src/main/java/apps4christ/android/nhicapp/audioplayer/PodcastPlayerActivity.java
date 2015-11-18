@@ -349,11 +349,13 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
         // Connect the dots: give the ShareActionProvider its Share Intent
         if (mShareActionProvider != null) {
             mShareActionProvider.setShareIntent(mShareIntent);
+            return true;
         }
 
-        // Return true so Android will know we want to display the menu
-        return true;
+        return false;
     }
+
+    
 
 
 }
