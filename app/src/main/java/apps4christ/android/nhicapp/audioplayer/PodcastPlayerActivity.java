@@ -9,9 +9,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
+import android.widget.ShareActionProvider;
 import android.widget.TextView;
 
 import com.google.android.gms.analytics.GoogleAnalytics;
@@ -47,6 +50,8 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
     private int seekBackwardTime = 5000; // 5000 milliseconds
     private Handler mHandler = new Handler();
     private int position;
+    private Intent mShareIntent;
+    private ShareActionProvider mShareActionProvider;
 
     static final String PODCAST_POS = "podcastPos";
     static final String PODCAST_URL = "podcastUrl";
@@ -83,6 +88,12 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
 
         podcastProgressBar.setOnSeekBarChangeListener(this);
 
+        // Set share button to share podcasts with the world!
+        mShareIntent = new Intent();
+        mShareIntent.setAction(Intent.ACTION_SEND);
+        mShareIntent.setType("text/plain");
+        mShareIntent.putExtra(Intent.EXTRA_TEXT, url);
+
         /**
          * Play button click event
          * plays a song and changes button to pause image
@@ -93,22 +104,22 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
             @Override
             public void onClick(View arg0) {
 
-                if(podcastSrv == null)
+                if (podcastSrv == null)
                     return;
                 // check for already playing
                 if (podcastSrv.isPlaying()) {
-                        Log.d("CONTROL", "Pausing");
-                        podcastSrv.pause();
-                        // Changing button image to play button
-                        btnPlay.setImageResource(R.drawable.btn_play);
+                    Log.d("CONTROL", "Pausing");
+                    podcastSrv.pause();
+                    // Changing button image to play button
+                    btnPlay.setImageResource(R.drawable.btn_play);
 
                 } else {
                     // Resume song
-                        podcastSrv.playPodcast();
+                    podcastSrv.playPodcast();
 
-                        // Changing button image to pause button
-                        btnPlay.setImageResource(R.drawable.btn_pause);
-                        updateProgressBar();
+                    // Changing button image to pause button
+                    btnPlay.setImageResource(R.drawable.btn_pause);
+                    updateProgressBar();
 
                 }
 
@@ -323,5 +334,28 @@ public class PodcastPlayerActivity extends Activity implements SeekBar.OnSeekBar
         podcastSrv = null;
         super.onDestroy();
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.share_menu, menu);
+
+        // Find the MenuItem that we know has the ShareActionProvider
+        MenuItem item = menu.findItem(R.id.menu_item_share);
+
+        // Get its ShareActionProvider
+        mShareActionProvider = (ShareActionProvider) item.getActionProvider();
+
+        // Connect the dots: give the ShareActionProvider its Share Intent
+        if (mShareActionProvider != null) {
+            mShareActionProvider.setShareIntent(mShareIntent);
+            return true;
+        }
+
+        return false;
+    }
+
+    
+
 
 }
