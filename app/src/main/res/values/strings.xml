@@ -127,7 +127,7 @@
 
     <string name ="nhicAckPpl">Samantha Aw, Tara Bastatas, Martha Bailon, Kyla Hoggard, Kevin Hsu, Eric Hu, Spencer Huang, Joy Macaluso, Pat Macaluso, Sherry Ren, Dawn Roman, Joanne Shea, Rachel Tien, Aaron Tokita, Kenny Tsai, Eric Wang, Annie Wong. </string>
     <string name = "DevAck">Special thanks to the following people who helped with the development of the app</string>
-    <string name = "DevAckPpl">Joe Chee, Zechariah Cheung, Steven Hsu, Peter Hu, Mark Merin, Torey Tokita, Joseph Tsai, Derek Tseng</string>
+    <string name = "DevAckPpl">Joe Chee, Zechariah Cheung, Steven Hsu, Peter Hu, Mark Merin, Joseph Tsai, Derek Tseng</string>
     <!-- Acknowledgements Items -->
     <string-array name="ack_items">
         <item>Samantha Aw</item>
