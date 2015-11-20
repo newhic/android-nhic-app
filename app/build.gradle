@@ -8,8 +8,8 @@ android {
         applicationId "apps4christ.android.nhicapp"
         minSdkVersion 15
         targetSdkVersion 21
-        versionCode 8
-        versionName "1.1.4"
+        versionCode 9
+        versionName "1.2.0"
     }
     buildTypes {
         release {
